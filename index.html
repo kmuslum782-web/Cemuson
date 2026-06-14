@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8" />
@@ -551,16 +551,19 @@ textarea{height:120px;resize:none}
 <nav class="bottom-nav" id="bottomNav" style="display:none">
   <div class="nav-inner">
     <button class="nav-btn active" data-screen="home" onclick="openScreen('home')">
-      <span class="nav-icon">[Ana]</span>Ana
+      Ana
     </button>
+
     <button class="nav-btn" data-screen="bills" onclick="openScreen('bills')">
-      <span class="nav-icon">[Odeme]</span>Odeme
+      Odeme
     </button>
+
     <button class="nav-btn" data-screen="daily" onclick="openScreen('daily')">
-      <span class="nav-icon">[Para]</span>Gunluk
+      Gunluk
     </button>
+
     <button class="nav-btn" data-screen="plan" onclick="openScreen('plan')">
-      <span class="nav-icon">[Plan]</span>Plan
+      Plan
     </button>
   </div>
 </nav>
@@ -1076,7 +1079,7 @@ function renderBills(){
             ${bill.paid ? "Odenmedi Yap" : "Odendi Yap"}
           </button>
           <button class="btn btn-red" onclick="removeBillFuture('${bill.id}')">
-            Gelecekten Kaldir
+            Tekrar Etmesin
           </button>
         </div>
       </div>
@@ -1231,7 +1234,7 @@ window.toggleBillPaid = async function(key){
 };
 
 window.removeBillFuture = async function(id){
-  if(!confirm("Bu sabit odeme bu aydan sonraki aylardan kaldirilsin mi?")) return;
+  if(!confirm("Bu ödeme sonraki aylarda görünmesin mi?")) return;
 
   data.bills = data.bills.map(bill => {
     if(bill.id !== id) return bill;
@@ -1499,3 +1502,48 @@ document.getElementById("guestLoginBtn").addEventListener("click", () => {
   isGuest = true;
   currentUser = null;
   loadGuestData();
+  enterApp();
+});
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  if(isGuest){
+    location.reload();
+  }else{
+    await signOut(auth);
+    location.reload();
+  }
+});
+
+function enterApp(){
+  document.getElementById("loginPage").style.display = "none";
+  document.getElementById("appPage").style.display = "block";
+  document.getElementById("bottomNav").style.display = "block";
+
+  document.getElementById("userModeText").innerText = isGuest
+    ? "Hesapsiz deneme modu"
+    : "Google hesabi ile senkron";
+
+  document.getElementById("accountText").innerText = isGuest
+    ? "Hesapsiz deneme: Veriler sadece bu cihazda tutulur."
+    : "Giris yapan kullanici: " + (currentUser.email || "");
+
+  render();
+}
+
+setupDaySelect();
+
+onAuthStateChanged(auth, async (user) => {
+  if(user){
+    try{
+      currentUser = user;
+      isGuest = false;
+      await loadCloudData(user);
+      enterApp();
+    }catch(error){
+      showError("loginError","Veri yukleme hatasi: " + error.message);
+    }
+  }
+});
+</script>
+</body>
+</html>
