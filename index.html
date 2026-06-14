@@ -465,8 +465,15 @@ function dailyTotal(m){return monthDaily(m).reduce((s,x)=>s+Number(x.amount||0),
 function todayTotal(){return todayDaily().reduce((s,x)=>s+Number(x.amount||0),0)}
 function freeBudget(m){return Number(data.plan.income||0)-Number(data.plan.saving||0)-billTotal(m)}
 function monthLeft(m){return freeBudget(m)-dailyTotal(m)}
-function dailyTarget(){return freeBudget(currentMonth())/daysInMonth(currentMonth())}
-function todayLeft(){return dailyTarget()-todayTotal()}
+function dailyTarget(){
+  const left = monthLeft(currentMonth());
+  const days = remainingDays();
+  return left / days;
+}
+
+function todayLeft(){
+  return dailyTarget();
+}
 
 function openScreen(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
