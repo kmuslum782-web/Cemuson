@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FinAsist</title>
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0f7a4f">
 <meta name="mobile-web-app-capable" content="yes">
@@ -12,90 +13,381 @@
 
 <style>
 :root{
-  --bg:#f4f7f6;--card:#fff;--text:#101828;--muted:#667085;--line:#e5e7eb;
-  --green:#0f7a4f;--greenSoft:#e8f5ef;--red:#b42318;--redSoft:#fdecec;
-  --yellow:#8a6200;--yellowSoft:#fff6d8;--blue:#1d4ed8;--blueSoft:#eef4ff;
+  --bg:#f4f7f6;
+  --card:#ffffff;
+  --text:#101828;
+  --muted:#667085;
+  --line:#e5e7eb;
+
+  --green:#0f7a4f;
+  --green2:#0d5f47;
+  --greenSoft:#e8f5ef;
+
+  --red:#b42318;
+  --redSoft:#fdecec;
+
+  --yellow:#8a6200;
+  --yellowSoft:#fff6d8;
+
+  --blue:#1d4ed8;
+  --blueSoft:#eef4ff;
+
+  --graySoft:#f2f4f7;
   --shadow:0 8px 24px rgba(16,24,40,.07);
 }
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;padding-bottom:88px}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  padding-bottom:92px;
+}
+button,input,select,textarea{font-family:inherit}
+button{border:0;cursor:pointer}
 .app{max-width:760px;margin:0 auto}
-.header{background:linear-gradient(135deg,#0f7a4f,#0d5f47);color:white;padding:18px 16px 22px;border-radius:0 0 26px 26px}
-.header-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.logo{font-size:29px;font-weight:900}
-.subtitle{font-size:13px;opacity:.92;margin-top:3px}
-.pill{background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.24);padding:8px 11px;border-radius:999px;font-size:12px;font-weight:900;white-space:nowrap}
 .page{padding:14px}
-.card{background:white;border-radius:22px;padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
-.screen{display:none}.screen.active{display:block}
-.label{color:var(--muted);font-size:13px;font-weight:900}
-.big-money{font-size:38px;font-weight:900;line-height:1;margin-top:8px;letter-spacing:-1px}
-.note{margin-top:13px;padding:13px;border-radius:16px;font-size:14px;font-weight:900;line-height:1.35}
-.good{background:var(--greenSoft);color:var(--green)}.warn{background:var(--yellowSoft);color:var(--yellow)}.bad{background:var(--redSoft);color:var(--red)}.info{background:var(--blueSoft);color:var(--blue)}
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.metric{background:#f8faf9;border:1px solid #edf1ef;border-radius:16px;padding:12px 8px;text-align:center}
-.metric .k{color:var(--muted);font-size:12px;font-weight:900;margin-bottom:5px}
-.metric .v{font-size:15px;font-weight:900}
-.section-title{font-size:21px;font-weight:900;margin:0 0 12px}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
-button{border:0;font-family:inherit;cursor:pointer}
-.btn{padding:14px;border-radius:16px;font-size:15px;font-weight:900}
-.btn-main{background:var(--green);color:white}.btn-soft{background:var(--greenSoft);color:var(--green)}
-.btn-blue{background:var(--blueSoft);color:var(--blue)}.btn-red{background:var(--redSoft);color:var(--red)}
-.btn-gray{background:#f2f4f7;color:#344054}.full{width:100%}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eef0f2}
+
+.header{
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:white;
+  padding:22px 16px 24px;
+  border-radius:0 0 28px 28px;
+}
+.header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.logo{font-size:42px;font-weight:900;letter-spacing:-1px;line-height:1}
+.subtitle{font-size:17px;opacity:.92;margin-top:8px;line-height:1.25}
+.pill{
+  background:rgba(255,255,255,.17);
+  border:1px solid rgba(255,255,255,.24);
+  padding:10px 13px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.card{
+  background:var(--card);
+  border-radius:24px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  margin-bottom:14px;
+}
+.screen{display:none}
+.screen.active{display:block}
+
+.section-title{
+  font-size:28px;
+  font-weight:900;
+  margin:0 0 14px;
+  letter-spacing:-.3px;
+}
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+.label{
+  color:var(--muted);
+  font-size:14px;
+  font-weight:900;
+}
+.big-money{
+  font-size:42px;
+  font-weight:900;
+  line-height:1;
+  margin-top:8px;
+  letter-spacing:-1px;
+}
+.note{
+  margin-top:13px;
+  padding:14px;
+  border-radius:18px;
+  font-size:15px;
+  font-weight:900;
+  line-height:1.45;
+  white-space:pre-line;
+}
+.good{background:var(--greenSoft);color:var(--green)}
+.warn{background:var(--yellowSoft);color:var(--yellow)}
+.bad{background:var(--redSoft);color:var(--red)}
+.info{background:var(--blueSoft);color:var(--blue)}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:14px;
+}
+.metric{
+  background:#f8faf9;
+  border:1px solid #edf1ef;
+  border-radius:18px;
+  padding:13px 8px;
+  text-align:center;
+}
+.metric .k{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:6px;
+  line-height:1.2;
+}
+.metric .v{
+  font-size:15px;
+  font-weight:900;
+  line-height:1.2;
+}
+
+.btn{
+  padding:15px;
+  border-radius:18px;
+  font-size:16px;
+  font-weight:900;
+  line-height:1.2;
+}
+.btn-main{background:var(--green);color:white}
+.btn-soft{background:var(--greenSoft);color:var(--green)}
+.btn-blue{background:var(--blueSoft);color:var(--blue)}
+.btn-red{background:var(--redSoft);color:var(--red)}
+.btn-gray{background:var(--graySoft);color:#344054}
+.full{width:100%}
+
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 0;
+  border-bottom:1px solid #eef0f2;
+}
 .row:last-child{border-bottom:0}
-.row-title{font-size:16px;font-weight:900}
-.row-meta{font-size:13px;color:var(--muted);margin-top:4px;font-weight:700;line-height:1.35}
-.row-value{font-size:16px;font-weight:900;text-align:right;white-space:nowrap}
-.item{background:white;border:1px solid var(--line);border-radius:18px;padding:14px}
-.list{display:grid;gap:10px}
-.badge{display:inline-flex;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900;white-space:nowrap}
-.b-green{background:var(--greenSoft);color:var(--green)}.b-red{background:var(--redSoft);color:var(--red)}
-.b-yellow{background:var(--yellowSoft);color:var(--yellow)}.b-blue{background:var(--blueSoft);color:var(--blue)}
-.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
-.chip{background:#eef2f1;color:#344054;border-radius:999px;padding:10px 13px;font-weight:900;white-space:nowrap}
-.chip.active{background:var(--green);color:white}
-.month-switch{display:grid;grid-template-columns:44px 1fr 44px;gap:10px;align-items:center}
-.month-center{background:#f8faf9;border:1px solid #edf1ef;padding:12px;border-radius:15px;text-align:center;font-weight:900}
-.empty{color:var(--muted);text-align:center;padding:22px 10px;font-weight:800;line-height:1.35}
-.field{margin-bottom:11px}
-.field label{display:block;color:var(--muted);font-size:13px;font-weight:900;margin-bottom:6px}
-input,select,textarea{width:100%;padding:14px;border:1px solid #d8dee4;border-radius:14px;font-size:16px;outline:none;font-family:Arial,sans-serif}
+.row-title{font-size:17px;font-weight:900}
+.row-meta{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:5px;
+  font-weight:800;
+  line-height:1.35;
+}
+.row-value{
+  font-size:17px;
+  font-weight:900;
+  text-align:right;
+  white-space:nowrap;
+}
+.item{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:15px;
+}
+.list{display:grid;gap:11px}
+.badge{
+  display:inline-flex;
+  padding:8px 11px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.b-green{background:var(--greenSoft);color:var(--green)}
+.b-red{background:var(--redSoft);color:var(--red)}
+.b-yellow{background:var(--yellowSoft);color:var(--yellow)}
+.b-blue{background:var(--blueSoft);color:var(--blue)}
+
+.month-switch{
+  display:grid;
+  grid-template-columns:56px 1fr 56px;
+  gap:10px;
+  align-items:center;
+}
+.month-center{
+  background:#f8faf9;
+  border:1px solid #edf1ef;
+  padding:17px 12px;
+  border-radius:18px;
+  text-align:center;
+  font-size:20px;
+  font-weight:900;
+}
+.empty{
+  color:var(--muted);
+  text-align:center;
+  padding:24px 10px;
+  font-weight:900;
+  line-height:1.35;
+}
+
+.field{margin-bottom:12px}
+.field label{
+  display:block;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:900;
+  margin-bottom:7px;
+}
+input,select,textarea{
+  width:100%;
+  padding:15px;
+  border:1px solid #d8dee4;
+  border-radius:16px;
+  font-size:16px;
+  outline:none;
+  background:white;
+}
 textarea{height:120px;resize:none}
-.error-text{display:none;margin-top:8px;padding:10px 12px;border-radius:12px;background:var(--redSoft);color:var(--red);font-size:13px;font-weight:900}
+
+.error-text{
+  display:none;
+  margin-top:8px;
+  padding:11px 12px;
+  border-radius:14px;
+  background:var(--redSoft);
+  color:var(--red);
+  font-size:13px;
+  font-weight:900;
+  line-height:1.35;
+}
 .error-text.show{display:block}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(16,24,40,.48);z-index:100;padding:16px;align-items:center;justify-content:center}
+
+.modal-bg{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(16,24,40,.48);
+  z-index:100;
+  padding:16px;
+  align-items:center;
+  justify-content:center;
+}
 .modal-bg.show{display:flex}
-.modal{width:100%;max-width:520px;background:white;border-radius:24px;padding:18px;max-height:88vh;overflow:auto;box-shadow:0 20px 44px rgba(0,0,0,.22)}
-.modal-title{margin:0 0 14px;font-size:22px;font-weight:900}
-.bottom-nav{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);border-top:1px solid #e5e7eb;backdrop-filter:blur(10px);padding:8px 10px 12px;z-index:50}
-.nav-inner{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.nav-btn{background:transparent;color:#667085;border-radius:14px;padding:8px 4px;font-size:12px;font-weight:900}
-.nav-btn.active{background:var(--greenSoft);color:var(--green)}
-.nav-icon{display:block;font-size:19px;margin-bottom:2px}
-.login-wrap{max-width:520px;margin:0 auto;padding:18px}
-.small{font-size:13px;color:var(--muted);line-height:1.45;font-weight:700}
-@media(max-width:640px){.big-money{font-size:33px}.metric .v{font-size:13px}}
+.modal{
+  width:100%;
+  max-width:520px;
+  background:white;
+  border-radius:24px;
+  padding:18px;
+  max-height:88vh;
+  overflow:auto;
+  box-shadow:0 20px 44px rgba(0,0,0,.22);
+}
+.modal-title{
+  margin:0 0 15px;
+  font-size:24px;
+  font-weight:900;
+}
+
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(255,255,255,.97);
+  border-top:1px solid #e5e7eb;
+  backdrop-filter:blur(10px);
+  padding:8px 10px 12px;
+  z-index:50;
+}
+.nav-inner{
+  max-width:760px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+.nav-btn{
+  background:transparent;
+  color:#667085;
+  border-radius:16px;
+  padding:9px 4px;
+  font-size:13px;
+  font-weight:900;
+}
+.nav-btn.active{
+  background:var(--greenSoft);
+  color:var(--green);
+}
+.nav-icon{
+  display:block;
+  font-size:20px;
+  margin-bottom:2px;
+}
+
+.login-wrap{
+  max-width:520px;
+  margin:0 auto;
+  padding:0 18px 18px;
+}
+.login-wrap .header{
+  margin:0 -18px 18px;
+}
+.small{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.45;
+  font-weight:800;
+}
+.safe-login{
+  background:var(--greenSoft);
+  color:var(--green);
+}
+.ai-answer{
+  font-size:15px;
+  line-height:1.5;
+}
+@media(max-width:640px){
+  .logo{font-size:38px}
+  .subtitle{font-size:16px}
+  .big-money{font-size:36px}
+  .section-title{font-size:25px}
+  .metric .v{font-size:13px}
+  .btn{font-size:15px}
+}
 </style>
 </head>
 
 <body>
 
 <div id="loginPage" class="login-wrap">
-  <div class="header" style="margin:0 -18px 18px">
+  <div class="header">
     <div class="logo">FinAsist</div>
-    <div class="subtitle">Yapay zeka destekli maaş yetirme asistanı</div>
+    <div class="subtitle">Ki艧isel b眉t莽e ve harcama karar asistan谋</div>
   </div>
 
   <div class="card">
-    <h2 class="section-title">Başla</h2>
-    <div class="note info">
-      Google ile giriş yaparsan verilerin hesabına kaydolur. Misafir modda veri sadece bu telefonda kalır.
+    <h2 class="section-title">Ba艧la</h2>
+
+    <div class="note safe-login">
+      Google ile g眉venli ba艧layarak b眉t莽eni hesab谋na kaydedebilir ve farkl谋 cihazlarda kullanabilirsin.
     </div>
-    <button class="btn btn-main full" style="margin-top:12px" id="googleLoginBtn">Google ile Giriş Yap</button>
-    <button class="btn btn-gray full" style="margin-top:10px" id="guestLoginBtn">Misafir Olarak Devam Et</button>
+
+    <button class="btn btn-main full" style="margin-top:12px" id="googleLoginBtn">
+      Google ile G眉venli Ba艧la
+    </button>
+
+    <button class="btn btn-gray full" style="margin-top:10px" id="guestLoginBtn">
+      Hesaps谋z Dene
+    </button>
+
+    <div class="small" style="margin-top:12px">
+      Hesaps谋z deneme modunda bilgiler sadece bu cihazda kal谋r.
+    </div>
+
     <div id="loginError" class="error-text"></div>
   </div>
 </div>
@@ -105,7 +397,7 @@ textarea{height:120px;resize:none}
     <div class="header-row">
       <div>
         <div class="logo">FinAsist</div>
-        <div class="subtitle" id="userModeText">Yükleniyor...</div>
+        <div class="subtitle" id="userModeText">Y眉kleniyor...</div>
       </div>
       <div class="pill" id="headerMonth">Bu ay</div>
     </div>
@@ -114,62 +406,82 @@ textarea{height:120px;resize:none}
   <main class="page">
 
     <section id="home" class="screen active">
+
       <div class="card">
-        <div class="label">Bugün kalan güvenli limit</div>
+        <div class="label">Bug眉n kalan g眉venli alan</div>
         <div class="big-money" id="todayLeftText">0 TL</div>
-        <div class="note info" id="homeNote">Planını girince hesaplama başlar.</div>
+
+        <div class="note info" id="homeNote">
+          Plan谋n谋 girince hesaplama ba艧lar.
+        </div>
+
         <div class="metrics">
-          <div class="metric"><div class="k">Bugün Hedef</div><div class="v" id="dailyTargetText">0 TL</div></div>
-          <div class="metric"><div class="k">Ay Kalan</div><div class="v" id="monthLeftText">0 TL</div></div>
-          <div class="metric"><div class="k">Bugün Harcama</div><div class="v" id="todaySpentText">0 TL</div></div>
+          <div class="metric">
+            <div class="k">G眉nl眉k Ba艧lang谋莽 Limiti</div>
+            <div class="v" id="dailyStartTargetText">0 TL</div>
+          </div>
+          <div class="metric">
+            <div class="k">Ay Kalan</div>
+            <div class="v" id="monthLeftText">0 TL</div>
+          </div>
+          <div class="metric">
+            <div class="k">Bug眉n Harcama</div>
+            <div class="v" id="todaySpentText">0 TL</div>
+          </div>
         </div>
       </div>
 
       <div class="card">
-        <h2 class="section-title">Bugün Ne Harcadın?</h2>
+        <h2 class="section-title">Bug眉n Ne Harcad谋n?</h2>
         <div class="grid2">
           <button class="btn btn-main" onclick="quickDaily(100)">+100 TL</button>
           <button class="btn btn-main" onclick="quickDaily(250)">+250 TL</button>
           <button class="btn btn-soft" onclick="quickDaily(500)">+500 TL</button>
-          <button class="btn btn-blue" onclick="openDailyModal()">Toplam Gir</button>
+          <button class="btn btn-blue" onclick="openDailyModal()">Tutar Gir</button>
         </div>
       </div>
 
       <div class="card">
-  <h2 class="section-title">AI Koç</h2>
+        <h2 class="section-title">AI Ko莽</h2>
 
-  <div class="grid2">
-    <button class="btn btn-main" onclick="askAI('month')">Bu Ayı Yorumla</button>
-    <button class="btn btn-soft" onclick="askAI('saving_plan')">Tasarruf Planı</button>
-  </div>
+        <div class="grid2">
+          <button class="btn btn-main" onclick="askAI('month')">Bu Ay谋 Yorumla</button>
+          <button class="btn btn-soft" onclick="askAI('saving_plan')">Tasarruf Plan谋</button>
+        </div>
 
-  <div class="field" style="margin-top:12px">
-    <label>Bunu alabilir miyim?</label>
-    <input id="buyQuestionInput" placeholder="Örn: Bugün 850 TL ayakkabı alsam zorlanır mıyım?">
-  </div>
+        <div class="field" style="margin-top:12px">
+          <label>Bunu alabilir miyim?</label>
+          <input id="buyQuestionInput" placeholder="脰rn: Bug眉n 850 TL ayakkab谋 alsam?">
+        </div>
 
-  <button class="btn btn-blue full" onclick="askAI('can_i_buy')">AI'ya Sor</button>
+        <button class="btn btn-blue full" onclick="askAI('can_i_buy')">AI'ya Sor</button>
 
-  <div class="note info" id="aiText">
-    AI Koç hazır. Plan ve harcama bilgilerine göre yorum yapar.
-  </div>
-</div>
+        <div class="note info ai-answer" id="aiText">
+          AI Ko莽 haz谋r. Plan, 枚deme ve harcama bilgilerine g枚re yorum yapar.
+        </div>
+      </div>
+
     </section>
 
     <section id="bills" class="screen">
       <div class="card">
         <div class="month-switch">
-          <button class="btn btn-gray" onclick="changeBillMonth(-1)">‹</button>
+          <button class="btn btn-gray" onclick="changeBillMonth(-1)">鈥�</button>
           <div class="month-center" id="billMonthText">Bu ay</div>
-          <button class="btn btn-gray" onclick="changeBillMonth(1)">›</button>
+          <button class="btn btn-gray" onclick="changeBillMonth(1)">鈥�</button>
         </div>
       </div>
 
       <div class="card">
         <div class="section-head">
-          <h2 class="section-title">Sabit Ödemeler</h2>
+          <h2 class="section-title">Sabit 脰demeler</h2>
           <button class="btn btn-soft" onclick="openBillModal()">+ Ekle</button>
         </div>
+
+        <div class="note info" id="billSummaryNote" style="margin-bottom:12px">
+          Bu ayki sabit 枚demelerin burada g枚r眉n眉r.
+        </div>
+
         <div id="billList" class="list"></div>
       </div>
     </section>
@@ -177,18 +489,18 @@ textarea{height:120px;resize:none}
     <section id="daily" class="screen">
       <div class="card">
         <div class="month-switch">
-          <button class="btn btn-gray" onclick="changeDailyMonth(-1)">‹</button>
+          <button class="btn btn-gray" onclick="changeDailyMonth(-1)">鈥�</button>
           <div class="month-center" id="dailyMonthText">Bu ay</div>
-          <button class="btn btn-gray" onclick="changeDailyMonth(1)">›</button>
+          <button class="btn btn-gray" onclick="changeDailyMonth(1)">鈥�</button>
         </div>
       </div>
 
       <div class="card">
-        <button class="btn btn-main full" onclick="openDailyModal()">+ Günlük Harcama Gir</button>
+        <button class="btn btn-main full" onclick="openDailyModal()">+ G眉nl眉k Harcama Gir</button>
       </div>
 
       <div class="card">
-        <h2 class="section-title">Günlük Harcamalar</h2>
+        <h2 class="section-title">G眉nl眉k Harcamalar</h2>
         <div id="dailyList" class="list"></div>
       </div>
     </section>
@@ -197,18 +509,39 @@ textarea{height:120px;resize:none}
       <div class="card">
         <div class="section-head">
           <h2 class="section-title">Plan</h2>
-          <button class="btn btn-soft" onclick="openPlanModal()">Düzenle</button>
+          <button class="btn btn-soft" onclick="openPlanModal()">D眉zenle</button>
         </div>
-        <div class="row"><div><div class="row-title">Aylık gelir</div></div><div class="row-value" id="incomeText">0 TL</div></div>
-        <div class="row"><div><div class="row-title">Birikim hedefi</div></div><div class="row-value" id="savingText">0 TL</div></div>
-        <div class="row"><div><div class="row-title">Bu ay sabit ödemeler</div></div><div class="row-value" id="billTotalText">0 TL</div></div>
-        <div class="row"><div><div class="row-title">Serbest bütçe</div></div><div class="row-value" id="freeBudgetText">0 TL</div></div>
+
+        <div class="row">
+          <div><div class="row-title">Ayl谋k gelir</div></div>
+          <div class="row-value" id="incomeText">0 TL</div>
+        </div>
+
+        <div class="row">
+          <div><div class="row-title">Birikim hedefi</div></div>
+          <div class="row-value" id="savingText">0 TL</div>
+        </div>
+
+        <div class="row">
+          <div><div class="row-title">Bu ay sabit 枚demeler</div></div>
+          <div class="row-value" id="billTotalText">0 TL</div>
+        </div>
+
+        <div class="row">
+          <div><div class="row-title">Bu ay harcanan</div></div>
+          <div class="row-value" id="monthSpentText">0 TL</div>
+        </div>
+
+        <div class="row">
+          <div><div class="row-title">Ay sonuna kalan</div></div>
+          <div class="row-value" id="freeBudgetText">0 TL</div>
+        </div>
       </div>
 
       <div class="card">
         <h2 class="section-title">Hesap</h2>
-        <div class="small" id="accountText">Yükleniyor...</div>
-        <button class="btn btn-red full" style="margin-top:12px" id="logoutBtn">Çıkış Yap</button>
+        <div class="small" id="accountText">Y眉kleniyor...</div>
+        <button class="btn btn-red full" style="margin-top:12px" id="logoutBtn">脟谋k谋艧 Yap</button>
       </div>
     </section>
 
@@ -217,60 +550,132 @@ textarea{height:120px;resize:none}
 
 <nav class="bottom-nav" id="bottomNav" style="display:none">
   <div class="nav-inner">
-    <button class="nav-btn active" data-screen="home" onclick="openScreen('home')"><span class="nav-icon">🏠</span>Ana</button>
-    <button class="nav-btn" data-screen="bills" onclick="openScreen('bills')"><span class="nav-icon">🧾</span>Ödeme</button>
-    <button class="nav-btn" data-screen="daily" onclick="openScreen('daily')"><span class="nav-icon">💸</span>Günlük</button>
-    <button class="nav-btn" data-screen="plan" onclick="openScreen('plan')"><span class="nav-icon">📌</span>Plan</button>
+    <button class="nav-btn active" data-screen="home" onclick="openScreen('home')">
+      <span class="nav-icon">馃彔</span>Ana
+    </button>
+    <button class="nav-btn" data-screen="bills" onclick="openScreen('bills')">
+      <span class="nav-icon">馃Ь</span>脰deme
+    </button>
+    <button class="nav-btn" data-screen="daily" onclick="openScreen('daily')">
+      <span class="nav-icon">馃捀</span>G眉nl眉k
+    </button>
+    <button class="nav-btn" data-screen="plan" onclick="openScreen('plan')">
+      <span class="nav-icon">馃搶</span>Plan
+    </button>
   </div>
 </nav>
 
 <div class="modal-bg" id="planModal">
   <div class="modal">
-    <h3 class="modal-title">Planı Düzenle</h3>
-    <div class="field"><label>Aylık gelir</label><input id="incomeInput" inputmode="decimal" placeholder="Örn: 35.000"></div>
-    <div class="field"><label>Birikim hedefi</label><input id="savingInput" inputmode="decimal" placeholder="Örn: 3.000"></div>
+    <h3 class="modal-title">Plan谋 D眉zenle</h3>
+
+    <div class="field">
+      <label>Ayl谋k gelir</label>
+      <input id="incomeInput" inputmode="decimal" placeholder="脰rn: 35.000">
+    </div>
+
+    <div class="field">
+      <label>Birikim hedefi</label>
+      <input id="savingInput" inputmode="decimal" placeholder="脰rn: 3.000">
+    </div>
+
     <div id="planError" class="error-text"></div>
+
     <div class="grid2">
       <button class="btn btn-main" onclick="savePlan()">Kaydet</button>
-      <button class="btn btn-gray" onclick="closeModal('planModal')">Vazgeç</button>
+      <button class="btn btn-gray" onclick="closeModal('planModal')">Vazge莽</button>
     </div>
   </div>
 </div>
 
 <div class="modal-bg" id="billModal">
   <div class="modal">
-    <h3 class="modal-title">Sabit Ödeme Ekle</h3>
-    <div class="field"><label>Ad</label><input id="billNameInput" placeholder="Kira, elektrik, internet"></div>
-    <div class="field"><label>Tür</label><select id="billTypeInput"><option>Kira</option><option>Fatura</option><option>Kredi / Borç</option><option>Abonelik</option><option>Diğer</option></select></div>
-    <div class="field"><label>Tahmini / aylık tutar</label><input id="billAmountInput" inputmode="decimal" placeholder="Örn: 1.250"></div>
-    <div class="field"><label>Son ödeme günü</label><select id="billDayInput"></select></div>
-    <div class="field"><label>Başlangıç ayı</label><input id="billStartInput" type="month"></div>
+    <h3 class="modal-title">Sabit 脰deme Ekle</h3>
+
+    <div class="field">
+      <label>Ad</label>
+      <input id="billNameInput" placeholder="Kira, elektrik, internet">
+    </div>
+
+    <div class="field">
+      <label>T眉r</label>
+      <select id="billTypeInput">
+        <option>Kira</option>
+        <option>Fatura</option>
+        <option>Kredi / Bor莽</option>
+        <option>Abonelik</option>
+        <option>Di臒er</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Ayl谋k tutar</label>
+      <input id="billAmountInput" inputmode="decimal" placeholder="脰rn: 1.250">
+    </div>
+
+    <div class="field">
+      <label>Son 枚deme g眉n眉</label>
+      <select id="billDayInput"></select>
+    </div>
+
+    <div class="field">
+      <label>Ba艧lang谋莽 ay谋</label>
+      <input id="billStartInput" type="month">
+    </div>
+
     <div id="billError" class="error-text"></div>
+
     <div class="grid2">
       <button class="btn btn-main" onclick="saveBill()">Kaydet</button>
-      <button class="btn btn-gray" onclick="closeModal('billModal')">Vazgeç</button>
+      <button class="btn btn-gray" onclick="closeModal('billModal')">Vazge莽</button>
     </div>
   </div>
 </div>
 
 <div class="modal-bg" id="dailyModal">
   <div class="modal">
-    <h3 class="modal-title">Günlük Harcama</h3>
-    <div class="field"><label>Tarih</label><input id="dailyDateInput" type="date"></div>
-    <div class="field"><label>Tutar</label><input id="dailyAmountInput" inputmode="decimal" placeholder="Örn: 500"></div>
-    <div class="field"><label>Not</label><input id="dailyNoteInput" placeholder="Bugün toplam, market, yemek..."></div>
+    <h3 class="modal-title">G眉nl眉k Harcama</h3>
+
+    <div class="field">
+      <label>Tarih</label>
+      <input id="dailyDateInput" type="date">
+    </div>
+
+    <div class="field">
+      <label>Tutar</label>
+      <input id="dailyAmountInput" inputmode="decimal" placeholder="脰rn: 500">
+    </div>
+
+    <div class="field">
+      <label>Not</label>
+      <input id="dailyNoteInput" placeholder="Market, yemek, ula艧谋m...">
+    </div>
+
     <div id="dailyError" class="error-text"></div>
+
     <div class="grid2">
       <button class="btn btn-main" onclick="saveDaily()">Kaydet</button>
-      <button class="btn btn-gray" onclick="closeModal('dailyModal')">Vazgeç</button>
+      <button class="btn btn-gray" onclick="closeModal('dailyModal')">Vazge莽</button>
     </div>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA1GxGbbq-hyMzJv0uMZ6jB4StgR_bb8E4",
@@ -292,93 +697,148 @@ let isGuest = false;
 let selectedBillMonth = currentMonth();
 let selectedDailyMonth = currentMonth();
 
-let data = {
-  plan:{income:0,saving:0},
-  bills:[],
-  billStates:{},
-  daily:[]
-};
+let data = emptyData();
 
 function emptyData(){
-  return {plan:{income:0,saving:0},bills:[],billStates:{},daily:[]};
+  return {
+    plan:{ income:0, saving:0 },
+    bills:[],
+    billStates:{},
+    daily:[]
+  };
 }
 
-function localKey(){return "finasist_guest_data_v1"}
+function localKey(){
+  return "finasist_guest_data_v2";
+}
 
-function parseAmount(v){
-  if(v===null||v===undefined)return 0;
-  let raw=String(v).trim();
-  if(raw==="")return 0;
-  raw=raw.replace(/\s/g,"");
-  const c=(raw.match(/,/g)||[]).length;
-  const d=(raw.match(/\./g)||[]).length;
-  let cleaned=raw;
-  if(c>0&&d>0){
-    cleaned=raw.lastIndexOf(",")>raw.lastIndexOf(".") ? raw.replace(/\./g,"").replace(",",".") : raw.replace(/,/g,"");
-  }else if(c>0){cleaned=raw.replace(",",".")}
-  else if(d>0){
-    const p=raw.split(".");
-    if(p.length===2&&p[1].length===3)cleaned=raw.replace(/\./g,"");
-    if(p.length>2)cleaned=raw.replace(/\./g,"");
+function escapeHtml(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function parseAmount(value){
+  if(value === null || value === undefined) return 0;
+
+  let raw = String(value).trim();
+  if(raw === "") return 0;
+
+  raw = raw.replace(/\s/g,"");
+
+  const commaCount = (raw.match(/,/g) || []).length;
+  const dotCount = (raw.match(/\./g) || []).length;
+
+  let cleaned = raw;
+
+  if(commaCount > 0 && dotCount > 0){
+    cleaned = raw.lastIndexOf(",") > raw.lastIndexOf(".")
+      ? raw.replace(/\./g,"").replace(",",".")
+      : raw.replace(/,/g,"");
+  }else if(commaCount > 0){
+    cleaned = raw.replace(",",".");
+  }else if(dotCount > 0){
+    const parts = raw.split(".");
+    if(parts.length === 2 && parts[1].length === 3){
+      cleaned = raw.replace(/\./g,"");
+    }
+    if(parts.length > 2){
+      cleaned = raw.replace(/\./g,"");
+    }
   }
-  const n=Number(cleaned);
-  if(isNaN(n)||n<0)return null;
-  return Math.round(n*100)/100;
+
+  const number = Number(cleaned);
+  if(isNaN(number) || number < 0) return null;
+
+  return Math.round(number * 100) / 100;
 }
 
-function money(v){
-  return Number(v||0).toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2})+" TL";
+function money(value){
+  return Number(value || 0).toLocaleString("tr-TR",{
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  }) + " TL";
 }
-function shortMoney(v){
-  return Number(v||0).toLocaleString("tr-TR",{maximumFractionDigits:0})+" TL";
+
+function shortMoney(value){
+  return Number(value || 0).toLocaleString("tr-TR",{
+    maximumFractionDigits:0
+  }) + " TL";
 }
+
 function today(){
-  const d=new Date();
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  const d = new Date();
+  return d.getFullYear() + "-" +
+    String(d.getMonth() + 1).padStart(2,"0") + "-" +
+    String(d.getDate()).padStart(2,"0");
 }
+
 function currentMonth(){
   return today().slice(0,7);
 }
-function monthLabel(m){
-  const months=["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
-  const p=m.split("-");
-  return months[Number(p[1])-1]+" "+p[0];
+
+function monthLabel(month){
+  const months = [
+    "Ocak","艦ubat","Mart","Nisan","May谋s","Haziran",
+    "Temmuz","A臒ustos","Eyl眉l","Ekim","Kas谋m","Aral谋k"
+  ];
+  const parts = month.split("-");
+  return months[Number(parts[1]) - 1] + " " + parts[0];
 }
-function addMonth(m,diff){
-  const d=new Date(m+"-01T00:00:00");
-  d.setMonth(d.getMonth()+diff);
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0");
+
+function addMonth(month,diff){
+  const d = new Date(month + "-01T00:00:00");
+  d.setMonth(d.getMonth() + diff);
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2,"0");
 }
+
 function dateTR(date){
-  if(!date)return "";
-  const p=date.split("-");
-  return p.length===3?p[2]+"."+p[1]+"."+p[0]:date;
+  if(!date) return "";
+  const parts = date.split("-");
+  return parts.length === 3 ? parts[2] + "." + parts[1] + "." + parts[0] : date;
 }
-function monthOfDate(date){return date ? date.slice(0,7) : ""}
-function daysInMonth(m){
-  const d=new Date(m+"-01T00:00:00");
-  return new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+
+function monthOfDate(date){
+  return date ? date.slice(0,7) : "";
 }
+
+function daysInMonth(month){
+  const d = new Date(month + "-01T00:00:00");
+  return new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+}
+
 function remainingDays(){
-  const d=new Date();
-  return Math.max(1,daysInMonth(currentMonth())-d.getDate()+1);
+  const d = new Date();
+  return Math.max(1, daysInMonth(currentMonth()) - d.getDate() + 1);
 }
+
 function showError(id,text){
-  const el=document.getElementById(id);
-  el.innerText=text||"";
-  el.classList.toggle("show",!!text);
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.innerText = text || "";
+  el.classList.toggle("show", !!text);
 }
+
 function closeModal(id){
-  document.getElementById(id).classList.remove("show");
-  ["planError","billError","dailyError"].forEach(x=>showError(x,""));
+  const modal = document.getElementById(id);
+  if(modal) modal.classList.remove("show");
+
+  ["planError","billError","dailyError"].forEach(errorId => {
+    showError(errorId,"");
+  });
 }
 
 async function saveData(){
   if(isGuest){
-    localStorage.setItem(localKey(),JSON.stringify(data));
+    localStorage.setItem(localKey(), JSON.stringify(data));
     return;
   }
-  if(!currentUser)return;
+
+  if(!currentUser) return;
+
   await setDoc(doc(db,"users",currentUser.uid,"app","main"),{
     ...data,
     updatedAt:serverTimestamp()
@@ -386,24 +846,27 @@ async function saveData(){
 }
 
 async function loadCloudData(user){
-  const ref=doc(db,"users",user.uid,"app","main");
-  const snap=await getDoc(ref);
+  const ref = doc(db,"users",user.uid,"app","main");
+  const snap = await getDoc(ref);
+
   if(snap.exists()){
-    const v=snap.data();
-    data={
-      plan:v.plan||{income:0,saving:0},
-      bills:Array.isArray(v.bills)?v.bills:[],
-      billStates:v.billStates||{},
-      daily:Array.isArray(v.daily)?v.daily:[]
+    const value = snap.data();
+
+    data = {
+      plan:value.plan || {income:0,saving:0},
+      bills:Array.isArray(value.bills) ? value.bills : [],
+      billStates:value.billStates || {},
+      daily:Array.isArray(value.daily) ? value.daily : []
     };
   }else{
-    data=emptyData();
+    data = emptyData();
+
     await setDoc(ref,{
       ...data,
       profile:{
         uid:user.uid,
-        name:user.displayName||"",
-        email:user.email||"",
+        name:user.displayName || "",
+        email:user.email || "",
         planType:"free",
         aiCredits:3
       },
@@ -415,456 +878,669 @@ async function loadCloudData(user){
 
 function loadGuestData(){
   try{
-    data=JSON.parse(localStorage.getItem(localKey())||"null")||emptyData();
+    data = JSON.parse(localStorage.getItem(localKey()) || "null") || emptyData();
   }catch(e){
-    data=emptyData();
+    data = emptyData();
   }
 }
 
-function billActiveInMonth(b,m){
-  if(m<b.startMonth)return false;
-  if(b.endMonth && m>=b.endMonth)return false;
+function billActiveInMonth(bill,month){
+  if(month < bill.startMonth) return false;
+  if(bill.endMonth && month >= bill.endMonth) return false;
   return true;
 }
 
-function billVersion(b,m){
-  const history=Array.isArray(b.history)?b.history:[];
-  let found=history[0]||{name:b.name,type:b.type,amount:b.amount,dueDay:b.dueDay,fromMonth:b.startMonth};
-  history.forEach(h=>{
-    if(h.fromMonth<=m && h.fromMonth>=found.fromMonth)found=h;
+function billVersion(bill,month){
+  const history = Array.isArray(bill.history) ? bill.history : [];
+  let found = history[0] || {
+    name:bill.name || "Sabit 枚deme",
+    type:bill.type || "Di臒er",
+    amount:Number(bill.amount || 0),
+    dueDay:Number(bill.dueDay || 1),
+    fromMonth:bill.startMonth || currentMonth()
+  };
+
+  history.forEach(item => {
+    if(item.fromMonth <= month && item.fromMonth >= found.fromMonth){
+      found = item;
+    }
   });
+
   return found;
 }
 
-function billKey(m,id){return m+"__"+id}
-
-function billInstances(m){
-  return data.bills.filter(b=>billActiveInMonth(b,m)).map(b=>{
-    const v=billVersion(b,m);
-    const key=billKey(m,b.id);
-    const st=data.billStates[key]||{};
-    return {
-      id:b.id,
-      key,
-      name:v.name,
-      type:v.type,
-      amount:st.amount||v.amount,
-      dueDay:v.dueDay,
-      paid:!!st.paid,
-      paidDate:st.paidDate||"",
-      startMonth:b.startMonth
-    };
-  }).sort((a,b)=>Number(a.dueDay)-Number(b.dueDay));
+function billKey(month,id){
+  return month + "__" + id;
 }
 
-function billTotal(m){return billInstances(m).reduce((s,b)=>s+Number(b.amount||0),0)}
-function unpaidBillTotal(m){return billInstances(m).filter(b=>!b.paid).reduce((s,b)=>s+Number(b.amount||0),0)}
-function monthDaily(m){return data.daily.filter(x=>monthOfDate(x.date)===m)}
-function todayDaily(){return data.daily.filter(x=>x.date===today())}
-function dailyTotal(m){return monthDaily(m).reduce((s,x)=>s+Number(x.amount||0),0)}
-function todayTotal(){return todayDaily().reduce((s,x)=>s+Number(x.amount||0),0)}
-function freeBudget(m){return Number(data.plan.income||0)-Number(data.plan.saving||0)-billTotal(m)}
-function monthLeft(m){return freeBudget(m)-dailyTotal(m)}
-function dailyTarget(){
-  const left = monthLeft(currentMonth());
-  const days = remainingDays();
-  return left / days;
+function billInstances(month){
+  return data.bills
+    .filter(bill => billActiveInMonth(bill,month))
+    .map(bill => {
+      const version = billVersion(bill,month);
+      const key = billKey(month,bill.id);
+      const state = data.billStates[key] || {};
+
+      return {
+        id:bill.id,
+        key:key,
+        name:version.name,
+        type:version.type,
+        amount:Number(state.amount || version.amount || 0),
+        dueDay:Number(version.dueDay || 1),
+        paid:!!state.paid,
+        paidDate:state.paidDate || "",
+        startMonth:bill.startMonth
+      };
+    })
+    .sort((a,b) => Number(a.dueDay) - Number(b.dueDay));
+}
+
+function billTotal(month){
+  return billInstances(month).reduce((sum,bill) => sum + Number(bill.amount || 0),0);
+}
+
+function unpaidBillTotal(month){
+  return billInstances(month)
+    .filter(bill => !bill.paid)
+    .reduce((sum,bill) => sum + Number(bill.amount || 0),0);
+}
+
+function monthDaily(month){
+  return data.daily.filter(item => monthOfDate(item.date) === month);
+}
+
+function todayDaily(){
+  return data.daily.filter(item => item.date === today());
+}
+
+function dailyTotal(month){
+  return monthDaily(month).reduce((sum,item) => sum + Number(item.amount || 0),0);
+}
+
+function todayTotal(){
+  return todayDaily().reduce((sum,item) => sum + Number(item.amount || 0),0);
+}
+
+function beforeTodayTotalInCurrentMonth(){
+  return monthDaily(currentMonth())
+    .filter(item => item.date < today())
+    .reduce((sum,item) => sum + Number(item.amount || 0),0);
+}
+
+function freeBudget(month){
+  return Number(data.plan.income || 0) -
+    Number(data.plan.saving || 0) -
+    billTotal(month);
+}
+
+function monthLeft(month){
+  return freeBudget(month) - dailyTotal(month);
+}
+
+function dailyStartTarget(){
+  const remainingBeforeTodaySpend = freeBudget(currentMonth()) - beforeTodayTotalInCurrentMonth();
+  return remainingBeforeTodaySpend / remainingDays();
 }
 
 function todayLeft(){
-  return dailyTarget();
+  return dailyStartTarget() - todayTotal();
+}
+
+function safeDailyAverageFromNow(){
+  return monthLeft(currentMonth()) / remainingDays();
 }
 
 function openScreen(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
+  document.querySelectorAll(".nav-btn").forEach(button => button.classList.remove("active"));
+
   document.getElementById(id).classList.add("active");
   document.querySelector(`.nav-btn[data-screen="${id}"]`).classList.add("active");
+
   render();
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function render(){
-  const cm=currentMonth();
-  document.getElementById("headerMonth").innerText=monthLabel(cm);
+  const cm = currentMonth();
 
-  document.getElementById("dailyTargetText").innerText=shortMoney(Math.max(0,dailyTarget()));
-  document.getElementById("todayLeftText").innerText=shortMoney(Math.max(0,todayLeft()));
-  document.getElementById("monthLeftText").innerText=shortMoney(monthLeft(cm));
-  document.getElementById("todaySpentText").innerText=shortMoney(todayTotal());
+  document.getElementById("headerMonth").innerText = monthLabel(cm);
 
-  const note=document.getElementById("homeNote");
+  const todayLeftValue = todayLeft();
+  const monthLeftValue = monthLeft(cm);
+  const todaySpentValue = todayTotal();
+
+  document.getElementById("dailyStartTargetText").innerText = shortMoney(Math.max(0,dailyStartTarget()));
+  document.getElementById("todayLeftText").innerText = shortMoney(Math.max(0,todayLeftValue));
+  document.getElementById("monthLeftText").innerText = shortMoney(monthLeftValue);
+  document.getElementById("todaySpentText").innerText = shortMoney(todaySpentValue);
+
+  const note = document.getElementById("homeNote");
+
   if(!data.plan.income){
-    note.className="note info";
-    note.innerText="Önce Plan ekranından aylık gelirini gir.";
-  }else if(freeBudget(cm)<0){
-    note.className="note bad";
-    note.innerText="Gelirin sabit ödemeler ve birikim hedefini karşılamıyor.";
-  }else if(todayLeft()<0){
-    note.className="note warn";
-    note.innerText="Bugün hedefin üstüne çıktın. Kalan günlerde daha dikkatli olmalısın.";
+    note.className = "note info";
+    note.innerText = "脰nce Plan ekran谋ndan ayl谋k gelirini gir. Sonra FinAsist g眉nl眉k g眉venli alan谋n谋 hesaplar.";
+  }else if(freeBudget(cm) < 0){
+    note.className = "note bad";
+    note.innerText = "Gelirin, sabit 枚demeler ve birikim hedefini kar艧谋lam谋yor. Plan谋 yeniden d眉zenlemelisin.";
+  }else if(todayLeftValue < 0){
+    note.className = "note warn";
+    note.innerText = "Bug眉n g眉venli alan谋 a艧t谋n. Bug眉n yeni b眉y眉k harcama yapmaman daha iyi olur.";
   }else{
-    note.className="note good";
-    note.innerText="Bugünlük limitin içinde kalırsan ay sonu daha rahat görünür.";
+    note.className = "note good";
+    note.innerText = "Bug眉n bu alan i莽inde kal谋rsan ay sonu plan谋n daha dengeli ilerler.";
   }
 
-  document.getElementById("billMonthText").innerText=monthLabel(selectedBillMonth);
-  const bills=billInstances(selectedBillMonth);
-  document.getElementById("billList").innerHTML=bills.length?bills.map(b=>`
-    <div class="item">
-      <div class="row" style="border-bottom:0;padding:0">
-        <div>
-          <div class="row-title">${b.name}</div>
-          <div class="row-meta">${b.type} · Her ayın ${b.dueDay}. günü</div>
-          <div style="margin-top:8px">
-            <span class="badge ${b.paid?'b-green':'b-yellow'}">${b.paid?'Ödendi '+dateTR(b.paidDate):'Ödenmedi'}</span>
-          </div>
-        </div>
-        <div class="row-value">${money(b.amount)}</div>
-      </div>
-      <div class="grid2" style="margin-top:12px">
-        <button class="btn ${b.paid?'btn-gray':'btn-main'}" onclick="toggleBillPaid('${b.key}')">${b.paid?'Ödenmedi Yap':'Ödendi Yap'}</button>
-        <button class="btn btn-red" onclick="removeBillFuture('${b.id}')">Gelecekten Kaldır</button>
-      </div>
-    </div>
-  `).join(""):`<div class="empty">Bu ay için sabit ödeme yok.</div>`;
+  renderBills();
+  renderDaily();
+  renderPlan();
+}
 
-  document.getElementById("dailyMonthText").innerText=monthLabel(selectedDailyMonth);
-  const dailies=monthDaily(selectedDailyMonth).sort((a,b)=>b.date.localeCompare(a.date));
-  document.getElementById("dailyList").innerHTML=dailies.length?`
-    <div class="item"><div class="row"><div><div class="row-title">Ay toplamı</div></div><div class="row-value">${money(dailyTotal(selectedDailyMonth))}</div></div></div>
-    ${dailies.map(x=>`
+function renderBills(){
+  const bills = billInstances(selectedBillMonth);
+  const unpaidTotal = unpaidBillTotal(selectedBillMonth);
+
+  document.getElementById("billMonthText").innerText = monthLabel(selectedBillMonth);
+
+  const billSummary = document.getElementById("billSummaryNote");
+  if(bills.length === 0){
+    billSummary.className = "note info";
+    billSummary.innerText = "Bu ay i莽in sabit 枚deme yok.";
+  }else if(unpaidTotal > 0){
+    billSummary.className = "note warn";
+    billSummary.innerText = "Bu ay bekleyen sabit 枚deme: " + money(unpaidTotal);
+  }else{
+    billSummary.className = "note good";
+    billSummary.innerText = "Bu ayki sabit 枚demelerin 枚denmi艧 g枚r眉n眉yor.";
+  }
+
+  document.getElementById("billList").innerHTML = bills.length
+    ? bills.map(bill => `
       <div class="item">
         <div class="row" style="border-bottom:0;padding:0">
-          <div><div class="row-title">${dateTR(x.date)}</div><div class="row-meta">${x.note||"Günlük toplam harcama"}</div></div>
-          <div class="row-value">${money(x.amount)}</div>
+          <div>
+            <div class="row-title">${escapeHtml(bill.name)}</div>
+            <div class="row-meta">${escapeHtml(bill.type)} 路 Her ay谋n ${bill.dueDay}. g眉n眉</div>
+            <div style="margin-top:8px">
+              <span class="badge ${bill.paid ? "b-green" : "b-yellow"}">
+                ${bill.paid ? "脰dendi " + escapeHtml(dateTR(bill.paidDate)) : "脰denmedi"}
+              </span>
+            </div>
+          </div>
+          <div class="row-value">${money(bill.amount)}</div>
         </div>
-        <button class="btn btn-red full" style="margin-top:12px" onclick="deleteDaily('${x.id}')">Sil</button>
+
+        <div class="grid2" style="margin-top:12px">
+          <button class="btn ${bill.paid ? "btn-gray" : "btn-main"}" onclick="toggleBillPaid('${bill.key}')">
+            ${bill.paid ? "脰denmedi Yap" : "脰dendi Yap"}
+          </button>
+          <button class="btn btn-red" onclick="removeBillFuture('${bill.id}')">
+            Gelecekten Kald谋r
+          </button>
+        </div>
       </div>
-    `).join("")}
-  `:`<div class="empty">Bu ay günlük harcama yok.</div>`;
-
-  document.getElementById("incomeText").innerText=money(data.plan.income);
-  document.getElementById("savingText").innerText=money(data.plan.saving);
-  document.getElementById("billTotalText").innerText=money(billTotal(cm));
-  document.getElementById("freeBudgetText").innerText=money(freeBudget(cm));
+    `).join("")
+    : `<div class="empty">Bu ay i莽in sabit 枚deme yok.</div>`;
 }
 
-window.changeBillMonth=function(diff){selectedBillMonth=addMonth(selectedBillMonth,diff);render()}
-window.changeDailyMonth=function(diff){selectedDailyMonth=addMonth(selectedDailyMonth,diff);render()}
+function renderDaily(){
+  document.getElementById("dailyMonthText").innerText = monthLabel(selectedDailyMonth);
 
-window.openPlanModal=function(){
-  document.getElementById("incomeInput").value=data.plan.income||"";
-  document.getElementById("savingInput").value=data.plan.saving||"";
+  const dailies = monthDaily(selectedDailyMonth)
+    .sort((a,b) => b.date.localeCompare(a.date));
+
+  document.getElementById("dailyList").innerHTML = dailies.length
+    ? `
+      <div class="item">
+        <div class="row">
+          <div><div class="row-title">Ay toplam谋</div></div>
+          <div class="row-value">${money(dailyTotal(selectedDailyMonth))}</div>
+        </div>
+      </div>
+
+      ${dailies.map(item => `
+        <div class="item">
+          <div class="row" style="border-bottom:0;padding:0">
+            <div>
+              <div class="row-title">${escapeHtml(dateTR(item.date))}</div>
+              <div class="row-meta">${escapeHtml(item.note || "G眉nl眉k harcama")}</div>
+            </div>
+            <div class="row-value">${money(item.amount)}</div>
+          </div>
+
+          <button class="btn btn-red full" style="margin-top:12px" onclick="deleteDaily('${item.id}')">
+            Sil
+          </button>
+        </div>
+      `).join("")}
+    `
+    : `<div class="empty">Bu ay g眉nl眉k harcama yok.</div>`;
+}
+
+function renderPlan(){
+  const cm = currentMonth();
+
+  document.getElementById("incomeText").innerText = money(data.plan.income);
+  document.getElementById("savingText").innerText = money(data.plan.saving);
+  document.getElementById("billTotalText").innerText = money(billTotal(cm));
+  document.getElementById("monthSpentText").innerText = money(dailyTotal(cm));
+  document.getElementById("freeBudgetText").innerText = money(monthLeft(cm));
+}
+
+window.changeBillMonth = function(diff){
+  selectedBillMonth = addMonth(selectedBillMonth,diff);
+  render();
+};
+
+window.changeDailyMonth = function(diff){
+  selectedDailyMonth = addMonth(selectedDailyMonth,diff);
+  render();
+};
+
+window.openPlanModal = function(){
+  document.getElementById("incomeInput").value = data.plan.income || "";
+  document.getElementById("savingInput").value = data.plan.saving || "";
   document.getElementById("planModal").classList.add("show");
-}
-window.savePlan=async function(){
-  const income=parseAmount(document.getElementById("incomeInput").value);
-  const saving=parseAmount(document.getElementById("savingInput").value);
-  if(income===null){showError("planError","Gelir hatalı.");return}
-  if(saving===null){showError("planError","Birikim hatalı.");return}
-  data.plan={income,saving};
-  await saveData();closeModal("planModal");render();
-}
+};
 
-window.openBillModal=function(){
-  document.getElementById("billNameInput").value="";
-  document.getElementById("billAmountInput").value="";
-  document.getElementById("billStartInput").value=currentMonth();
+window.savePlan = async function(){
+  const income = parseAmount(document.getElementById("incomeInput").value);
+  const saving = parseAmount(document.getElementById("savingInput").value);
+
+  if(income === null){
+    showError("planError","Gelir hatal谋.");
+    return;
+  }
+
+  if(saving === null){
+    showError("planError","Birikim hedefi hatal谋.");
+    return;
+  }
+
+  data.plan = { income, saving };
+
+  await saveData();
+  closeModal("planModal");
+  render();
+};
+
+window.openBillModal = function(){
+  document.getElementById("billNameInput").value = "";
+  document.getElementById("billTypeInput").value = "Kira";
+  document.getElementById("billAmountInput").value = "";
+  document.getElementById("billDayInput").value = "1";
+  document.getElementById("billStartInput").value = currentMonth();
   document.getElementById("billModal").classList.add("show");
-}
-window.saveBill=async function(){
-  const name=document.getElementById("billNameInput").value.trim();
-  const type=document.getElementById("billTypeInput").value;
-  const amount=parseAmount(document.getElementById("billAmountInput").value);
-  const dueDay=Number(document.getElementById("billDayInput").value);
-  const startMonth=document.getElementById("billStartInput").value;
-  if(!name){showError("billError","Ad girmelisin.");return}
-  if(amount===null||amount<=0){showError("billError","Tutar hatalı.");return}
-  if(!startMonth){showError("billError","Başlangıç ayı seç.");return}
-  const id=Date.now().toString();
+};
+
+window.saveBill = async function(){
+  const name = document.getElementById("billNameInput").value.trim();
+  const type = document.getElementById("billTypeInput").value;
+  const amount = parseAmount(document.getElementById("billAmountInput").value);
+  const dueDay = Number(document.getElementById("billDayInput").value);
+  const startMonth = document.getElementById("billStartInput").value;
+
+  if(!name){
+    showError("billError","Ad girmelisin.");
+    return;
+  }
+
+  if(amount === null || amount <= 0){
+    showError("billError","Tutar hatal谋.");
+    return;
+  }
+
+  if(!startMonth){
+    showError("billError","Ba艧lang谋莽 ay谋 se莽.");
+    return;
+  }
+
+  const id = Date.now().toString();
+
   data.bills.push({
-    id,startMonth,endMonth:null,
-    history:[{fromMonth:startMonth,name,type,amount,dueDay}]
+    id:id,
+    startMonth:startMonth,
+    endMonth:null,
+    history:[{
+      fromMonth:startMonth,
+      name:name,
+      type:type,
+      amount:amount,
+      dueDay:dueDay
+    }]
   });
-  await saveData();closeModal("billModal");render();
-}
-window.toggleBillPaid=async function(key){
-  const st=data.billStates[key]||{};
-  data.billStates[key]={...st,paid:!st.paid,paidDate:!st.paid?today():""};
-  await saveData();render();
-}
-window.removeBillFuture=async function(id){
-  if(!confirm("Bu sabit ödeme bu aydan sonraki aylardan kaldırılsın mı?"))return;
-  data.bills=data.bills.map(b=>b.id===id?{...b,endMonth:addMonth(selectedBillMonth,1)}:b);
-  await saveData();render();
-}
 
-window.openDailyModal=function(){
-  document.getElementById("dailyDateInput").value=today();
-  document.getElementById("dailyAmountInput").value="";
-  document.getElementById("dailyNoteInput").value="";
+  await saveData();
+  closeModal("billModal");
+  render();
+};
+
+window.toggleBillPaid = async function(key){
+  const state = data.billStates[key] || {};
+  const willBePaid = !state.paid;
+
+  data.billStates[key] = {
+    ...state,
+    paid:willBePaid,
+    paidDate:willBePaid ? today() : ""
+  };
+
+  await saveData();
+  render();
+};
+
+window.removeBillFuture = async function(id){
+  if(!confirm("Bu sabit 枚deme bu aydan sonraki aylardan kald谋r谋ls谋n m谋?")) return;
+
+  data.bills = data.bills.map(bill => {
+    if(bill.id !== id) return bill;
+    return {
+      ...bill,
+      endMonth:addMonth(selectedBillMonth,1)
+    };
+  });
+
+  await saveData();
+  render();
+};
+
+window.openDailyModal = function(){
+  document.getElementById("dailyDateInput").value = today();
+  document.getElementById("dailyAmountInput").value = "";
+  document.getElementById("dailyNoteInput").value = "";
   document.getElementById("dailyModal").classList.add("show");
-}
-window.quickDaily=async function(amount){
-  data.daily.push({id:Date.now().toString(),date:today(),amount,note:"Hızlı giriş"});
-  await saveData();render();
-}
-window.saveDaily=async function(){
-  const date=document.getElementById("dailyDateInput").value;
-  const amount=parseAmount(document.getElementById("dailyAmountInput").value);
-  const note=document.getElementById("dailyNoteInput").value.trim();
-  if(!date){showError("dailyError","Tarih seç.");return}
-  if(amount===null||amount<=0){showError("dailyError","Tutar hatalı.");return}
-  data.daily.push({id:Date.now().toString(),date,amount,note});
-  selectedDailyMonth=monthOfDate(date);
-  await saveData();closeModal("dailyModal");render();
-}
-window.deleteDaily=async function(id){
-  if(!confirm("Bu günlük harcama silinsin mi?"))return;
-  data.daily=data.daily.filter(x=>x.id!==id);
-  await saveData();render();
-}
+};
 
-window.closeModal=closeModal;
-window.openScreen=openScreen;
+window.quickDaily = async function(amount){
+  data.daily.push({
+    id:Date.now().toString(),
+    date:today(),
+    amount:Number(amount),
+    note:"H谋zl谋 giri艧"
+  });
+
+  await saveData();
+  render();
+};
+
+window.saveDaily = async function(){
+  const date = document.getElementById("dailyDateInput").value;
+  const amount = parseAmount(document.getElementById("dailyAmountInput").value);
+  const note = document.getElementById("dailyNoteInput").value.trim();
+
+  if(!date){
+    showError("dailyError","Tarih se莽.");
+    return;
+  }
+
+  if(amount === null || amount <= 0){
+    showError("dailyError","Tutar hatal谋.");
+    return;
+  }
+
+  data.daily.push({
+    id:Date.now().toString(),
+    date:date,
+    amount:amount,
+    note:note
+  });
+
+  selectedDailyMonth = monthOfDate(date);
+
+  await saveData();
+  closeModal("dailyModal");
+  render();
+};
+
+window.deleteDaily = async function(id){
+  if(!confirm("Bu g眉nl眉k harcama silinsin mi?")) return;
+
+  data.daily = data.daily.filter(item => item.id !== id);
+
+  await saveData();
+  render();
+};
+
+window.closeModal = closeModal;
+window.openScreen = openScreen;
 
 function setupDaySelect(){
-let html = "";
-for(let i = 1; i <= 31; i++){
-html += "<option value="${i}">${i}</option>";
-}
-document.getElementById("billDayInput").innerHTML = html;
+  let html = "";
+  for(let i = 1; i <= 31; i++){
+    html += `<option value="${i}">${i}</option>`;
+  }
+  document.getElementById("billDayInput").innerHTML = html;
 }
 
 function buildFinanceSummary(){
-const cm = currentMonth();
-const activeBills = billInstances(cm);
+  const cm = currentMonth();
+  const activeBills = billInstances(cm);
 
-const unpaidBills = activeBills
-.filter(b => !b.paid)
-.map(b => ({
-name: b.name,
-type: b.type,
-amount: Number(b.amount || 0),
-dueDay: b.dueDay,
-paid: false
-}));
+  const unpaidBills = activeBills
+    .filter(bill => !bill.paid)
+    .map(bill => ({
+      name:bill.name,
+      type:bill.type,
+      amount:Number(bill.amount || 0),
+      dueDay:bill.dueDay,
+      paid:false
+    }));
 
-const paidBills = activeBills
-.filter(b => b.paid)
-.map(b => ({
-name: b.name,
-type: b.type,
-amount: Number(b.amount || 0),
-dueDay: b.dueDay,
-paid: true,
-paidDate: b.paidDate || ""
-}));
+  const paidBills = activeBills
+    .filter(bill => bill.paid)
+    .map(bill => ({
+      name:bill.name,
+      type:bill.type,
+      amount:Number(bill.amount || 0),
+      dueDay:bill.dueDay,
+      paid:true,
+      paidDate:bill.paidDate || ""
+    }));
 
-const dailyEntries = monthDaily(cm)
-.sort((a, b) => b.date.localeCompare(a.date))
-.map(x => ({
-date: x.date,
-amount: Number(x.amount || 0),
-note: x.note || ""
-}));
+  const dailyEntries = monthDaily(cm)
+    .sort((a,b) => b.date.localeCompare(a.date))
+    .map(item => ({
+      date:item.date,
+      amount:Number(item.amount || 0),
+      note:item.note || ""
+    }));
 
-const last7Days = dailyEntries.filter(x => {
-const d = new Date(x.date + "T00:00:00");
-const now = new Date();
-const diff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
-return diff >= 0 && diff <= 7;
-});
+  const last7Days = dailyEntries.filter(item => {
+    const d = new Date(item.date + "T00:00:00");
+    const now = new Date();
+    const diff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+    return diff >= 0 && diff <= 7;
+  });
 
-const income = Number(data.plan.income || 0);
-const savingGoal = Number(data.plan.saving || 0);
-const fixedPaymentsTotal = billTotal(cm);
-const unpaidPaymentsTotal = unpaidBillTotal(cm);
-const monthSpending = dailyTotal(cm);
-const free = freeBudget(cm);
-const left = monthLeft(cm);
-const target = dailyTarget();
-const todaySpent = todayTotal();
-const todaySafeLeft = todayLeft();
+  const income = Number(data.plan.income || 0);
+  const savingGoal = Number(data.plan.saving || 0);
+  const fixedPaymentsTotal = billTotal(cm);
+  const unpaidPaymentsTotal = unpaidBillTotal(cm);
+  const monthSpending = dailyTotal(cm);
+  const free = freeBudget(cm);
+  const left = monthLeft(cm);
+  const startTarget = dailyStartTarget();
+  const todaySpent = todayTotal();
+  const todaySafeLeft = todayLeft();
+  const dailyAverageNow = safeDailyAverageFromNow();
 
-return {
-appName: "FinAsist",
-currency: "TL",
-month: cm,
-today: today(),
+  return {
+    appName:"FinAsist",
+    currency:"TL",
+    month:cm,
+    today:today(),
 
-userMode: isGuest ? "guest" : "signed_in",
-userEmail: currentUser && currentUser.email ? currentUser.email : null,
+    userMode:isGuest ? "guest" : "signed_in",
+    userEmail:currentUser && currentUser.email ? currentUser.email : null,
 
-plan: {
-  monthlyIncome: income,
-  savingGoal: savingGoal
-},
+    plan:{
+      monthlyIncome:income,
+      savingGoal:savingGoal
+    },
 
-monthSummary: {
-  monthlyIncome: income,
-  savingGoal: savingGoal,
-  fixedPaymentsTotal: fixedPaymentsTotal,
-  unpaidPaymentsTotal: unpaidPaymentsTotal,
-  freeBudgetAfterFixedAndSaving: free,
-  spentSoFarThisMonth: monthSpending,
-  remainingMoneyThisMonth: left,
-  dailySafeLimit: target,
-  todaySpent: todaySpent,
-  todayRemainingSafeLimit: todaySafeLeft,
-  remainingDaysIncludingToday: remainingDays()
-},
+    monthSummary:{
+      monthlyIncome:income,
+      savingGoal:savingGoal,
+      fixedPaymentsTotal:fixedPaymentsTotal,
+      unpaidPaymentsTotal:unpaidPaymentsTotal,
+      freeBudgetAfterFixedAndSaving:free,
+      spentSoFarThisMonth:monthSpending,
+      remainingMoneyThisMonth:left,
+      dailyStartLimit: startTarget,
+      safeDailyAverageFromNow: dailyAverageNow,
+      todaySpent:todaySpent,
+      todayRemainingSafeLimit:todaySafeLeft,
+      remainingDaysIncludingToday:remainingDays()
+    },
 
-bills: {
-  activeBills: activeBills.map(b => ({
-    name: b.name,
-    type: b.type,
-    amount: Number(b.amount || 0),
-    dueDay: b.dueDay,
-    paid: !!b.paid,
-    paidDate: b.paidDate || ""
-  })),
-  unpaidBills: unpaidBills,
-  paidBills: paidBills
-},
+    bills:{
+      activeBills:activeBills.map(bill => ({
+        name:bill.name,
+        type:bill.type,
+        amount:Number(bill.amount || 0),
+        dueDay:bill.dueDay,
+        paid:!!bill.paid,
+        paidDate:bill.paidDate || ""
+      })),
+      unpaidBills:unpaidBills,
+      paidBills:paidBills
+    },
 
-spending: {
-  dailyEntriesCount: dailyEntries.length,
-  dailyEntries: dailyEntries,
-  last7Days: last7Days
-},
+    spending:{
+      dailyEntriesCount:dailyEntries.length,
+      dailyEntries:dailyEntries,
+      last7Days:last7Days
+    },
 
-warnings: {
-  hasIncome: income > 0,
-  hasUnpaidBills: unpaidBills.length > 0,
-  isFreeBudgetNegative: free < 0,
-  isTodayOverLimit: todaySafeLeft < 0,
-  isMonthNegative: left < 0
-}
-
-};
-}
-
-window.askAI = async function(mode){
-const aiBox = document.getElementById("aiText");
-const questionInput = document.getElementById("buyQuestionInput");
-const question = questionInput ? questionInput.value.trim() : "";
-
-if(mode === "can_i_buy" && !question){
-aiBox.className = "note warn";
-aiBox.innerText = "Ne almak istediğini ve yaklaşık tutarı yazmalısın. Örn: Bugün 850 TL ayakkabı alsam zorlanır mıyım?";
-return;
-}
-
-if(!data.plan.income){
-aiBox.className = "note warn";
-aiBox.innerText = "AI yorum için önce Plan ekranından aylık gelirini girmen gerekiyor.";
-return;
-}
-
-aiBox.className = "note info";
-aiBox.innerText = "AI Koç düşünüyor...";
-
-try{
-const summary = buildFinanceSummary();
-
-console.log("FinAsist AI Summary:", summary);
-
-const response = await fetch("/.netlify/functions/ai-coach", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    mode: mode,
-    question: question,
-    summary: summary
-  })
-});
-
-let result = {};
-
-try{
-  result = await response.json();
-}catch(e){
-  result = {
-    error: "AI cevabı JSON olarak okunamadı."
+    warnings:{
+      hasIncome:income > 0,
+      hasUnpaidBills:unpaidBills.length > 0,
+      isFreeBudgetNegative:free < 0,
+      isTodayOverLimit:todaySafeLeft < 0,
+      isMonthNegative:left < 0
+    }
   };
 }
 
-if(!response.ok){
-  aiBox.className = "note bad";
-  aiBox.innerText = "AI hatası: " + (result.error || "Bilinmeyen hata");
-  return;
-}
+window.askAI = async function(mode){
+  const aiBox = document.getElementById("aiText");
+  const questionInput = document.getElementById("buyQuestionInput");
+  const question = questionInput ? questionInput.value.trim() : "";
 
-aiBox.className = "note good";
-aiBox.innerText = result.text || "AI cevap üretemedi.";
+  if(mode === "can_i_buy" && !question){
+    aiBox.className = "note warn ai-answer";
+    aiBox.innerText = "Ne almak istedi臒ini ve yakla艧谋k tutar谋 yazmal谋s谋n. 脰rn: Bug眉n 850 TL ayakkab谋 alsam?";
+    return;
+  }
 
-}catch(error){
-aiBox.className = "note bad";
-aiBox.innerText = "AI bağlantı hatası: " + error.message;
-}
+  if(!data.plan.income){
+    aiBox.className = "note warn ai-answer";
+    aiBox.innerText = "AI yorum i莽in 枚nce Plan ekran谋ndan ayl谋k gelirini girmen gerekiyor.";
+    return;
+  }
+
+  aiBox.className = "note info ai-answer";
+  aiBox.innerText = "AI Ko莽 d眉艧眉n眉yor...";
+
+  try{
+    const summary = buildFinanceSummary();
+
+    console.log("FinAsist AI Summary:", summary);
+
+    const response = await fetch("/.netlify/functions/ai-coach", {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        mode:mode,
+        question:question,
+        summary:summary
+      })
+    });
+
+    let result = {};
+
+    try{
+      result = await response.json();
+    }catch(e){
+      result = {
+        error:"AI cevab谋 JSON olarak okunamad谋."
+      };
+    }
+
+    if(!response.ok){
+      aiBox.className = "note bad ai-answer";
+      aiBox.innerText = "AI hatas谋: " + (result.error || "Bilinmeyen hata");
+      return;
+    }
+
+    aiBox.className = "note good ai-answer";
+    aiBox.innerText = result.text || "AI cevap 眉retemedi.";
+
+  }catch(error){
+    aiBox.className = "note bad ai-answer";
+    aiBox.innerText = "AI ba臒lant谋 hatas谋: " + error.message;
+  }
 };
 
 document.getElementById("googleLoginBtn").addEventListener("click", async () => {
-try{
-showError("loginError", "");
-const result = await signInWithPopup(auth, provider);
-currentUser = result.user;
-}catch(e){
-showError("loginError", "Giriş hatası: " + e.message);
-}
+  try{
+    showError("loginError","");
+    const result = await signInWithPopup(auth,provider);
+    currentUser = result.user;
+  }catch(error){
+    showError("loginError","Giri艧 hatas谋: " + error.message);
+  }
 });
 
 document.getElementById("guestLoginBtn").addEventListener("click", () => {
-isGuest = true;
-currentUser = null;
-loadGuestData();
-enterApp();
+  isGuest = true;
+  currentUser = null;
+  loadGuestData();
+  enterApp();
 });
 
 document.getElementById("logoutBtn").addEventListener("click", async () => {
-if(isGuest){
-location.reload();
-}else{
-await signOut(auth);
-location.reload();
-}
+  if(isGuest){
+    location.reload();
+  }else{
+    await signOut(auth);
+    location.reload();
+  }
 });
 
 function enterApp(){
-document.getElementById("loginPage").style.display = "none";
-document.getElementById("appPage").style.display = "block";
-document.getElementById("bottomNav").style.display = "block";
+  document.getElementById("loginPage").style.display = "none";
+  document.getElementById("appPage").style.display = "block";
+  document.getElementById("bottomNav").style.display = "block";
 
-document.getElementById("userModeText").innerText = isGuest
-? "Misafir mod"
-: "Google hesabı ile senkron";
+  document.getElementById("userModeText").innerText = isGuest
+    ? "Hesaps谋z deneme modu"
+    : "Google hesab谋 ile senkron";
 
-document.getElementById("accountText").innerText = isGuest
-? "Misafir kullanıcı: Veriler sadece bu cihazda tutulur."
-: "Giriş yapan kullanıcı: " + (currentUser.email || "");
+  document.getElementById("accountText").innerText = isGuest
+    ? "Hesaps谋z deneme: Veriler sadece bu cihazda tutulur."
+    : "Giri艧 yapan kullan谋c谋: " + (currentUser.email || "");
 
-render();
+  render();
 }
 
-onAuthStateChanged(auth, async (user) => {
 setupDaySelect();
 
-if(user){
-try{
-currentUser = user;
-isGuest = false;
-await loadCloudData(user);
-enterApp();
-}catch(e){
-showError("loginError", "Veri yükleme hatası: " + e.message);
-}
-}
+onAuthStateChanged(auth, async (user) => {
+  if(user){
+    try{
+      currentUser = user;
+      isGuest = false;
+      await loadCloudData(user);
+      enterApp();
+    }catch(error){
+      showError("loginError","Veri y眉kleme hatas谋: " + error.message);
+    }
+  }
 });
 </script>
-
 </body>
 </html>
