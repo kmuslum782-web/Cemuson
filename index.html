@@ -623,134 +623,241 @@ window.closeModal=closeModal;
 window.openScreen=openScreen;
 
 function setupDaySelect(){
-  let html="";
-  for(let i=1;i<=31;i++)html+=`<option value="${i}">${i}</option>`;
-  document.getElementById("billDayInput").innerHTML=html;
+let html = "";
+for(let i = 1; i <= 31; i++){
+html += "<option value="${i}">${i}</option>";
 }
+document.getElementById("billDayInput").innerHTML = html;
+}
+
 function buildFinanceSummary(){
-  const cm = currentMonth();
+const cm = currentMonth();
+const activeBills = billInstances(cm);
 
-  const activeBills = billInstances(cm);
-  const unpaidBills = activeBills
-    .filter(b => !b.paid)
-    .map(b => ({
-      name: b.name,
-      type: b.type,
-      amount: Number(b.amount || 0),
-      dueDay: b.dueDay
-    }));
+const unpaidBills = activeBills
+.filter(b => !b.paid)
+.map(b => ({
+name: b.name,
+type: b.type,
+amount: Number(b.amount || 0),
+dueDay: b.dueDay,
+paid: false
+}));
 
-  return {
-    month: cm,
-    income: Number(data.plan.income || 0),
-    savingGoal: Number(data.plan.saving || 0),
-    fixedPaymentsTotal: billTotal(cm),
-    unpaidPaymentsTotal: unpaidBillTotal(cm),
-    unpaidPayments: unpaidBills,
-    freeBudget: freeBudget(cm),
-    monthDailySpending: dailyTotal(cm),
-    monthLeft: monthLeft(cm),
-    dailyTarget: dailyTarget(),
-    todaySpending: todayTotal(),
-    todayLeft: todayLeft(),
-    remainingDays: remainingDays(),
-    dailyEntriesCount: monthDaily(cm).length,
-    mode: isGuest ? "guest" : "signed_in"
-  };
+const paidBills = activeBills
+.filter(b => b.paid)
+.map(b => ({
+name: b.name,
+type: b.type,
+amount: Number(b.amount || 0),
+dueDay: b.dueDay,
+paid: true,
+paidDate: b.paidDate || ""
+}));
+
+const dailyEntries = monthDaily(cm)
+.sort((a, b) => b.date.localeCompare(a.date))
+.map(x => ({
+date: x.date,
+amount: Number(x.amount || 0),
+note: x.note || ""
+}));
+
+const last7Days = dailyEntries.filter(x => {
+const d = new Date(x.date + "T00:00:00");
+const now = new Date();
+const diff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+return diff >= 0 && diff <= 7;
+});
+
+const income = Number(data.plan.income || 0);
+const savingGoal = Number(data.plan.saving || 0);
+const fixedPaymentsTotal = billTotal(cm);
+const unpaidPaymentsTotal = unpaidBillTotal(cm);
+const monthSpending = dailyTotal(cm);
+const free = freeBudget(cm);
+const left = monthLeft(cm);
+const target = dailyTarget();
+const todaySpent = todayTotal();
+const todaySafeLeft = todayLeft();
+
+return {
+appName: "FinAsist",
+currency: "TL",
+month: cm,
+today: today(),
+
+userMode: isGuest ? "guest" : "signed_in",
+userEmail: currentUser && currentUser.email ? currentUser.email : null,
+
+plan: {
+  monthlyIncome: income,
+  savingGoal: savingGoal
+},
+
+monthSummary: {
+  monthlyIncome: income,
+  savingGoal: savingGoal,
+  fixedPaymentsTotal: fixedPaymentsTotal,
+  unpaidPaymentsTotal: unpaidPaymentsTotal,
+  freeBudgetAfterFixedAndSaving: free,
+  spentSoFarThisMonth: monthSpending,
+  remainingMoneyThisMonth: left,
+  dailySafeLimit: target,
+  todaySpent: todaySpent,
+  todayRemainingSafeLimit: todaySafeLeft,
+  remainingDaysIncludingToday: remainingDays()
+},
+
+bills: {
+  activeBills: activeBills.map(b => ({
+    name: b.name,
+    type: b.type,
+    amount: Number(b.amount || 0),
+    dueDay: b.dueDay,
+    paid: !!b.paid,
+    paidDate: b.paidDate || ""
+  })),
+  unpaidBills: unpaidBills,
+  paidBills: paidBills
+},
+
+spending: {
+  dailyEntriesCount: dailyEntries.length,
+  dailyEntries: dailyEntries,
+  last7Days: last7Days
+},
+
+warnings: {
+  hasIncome: income > 0,
+  hasUnpaidBills: unpaidBills.length > 0,
+  isFreeBudgetNegative: free < 0,
+  isTodayOverLimit: todaySafeLeft < 0,
+  isMonthNegative: left < 0
+}
+
+};
 }
 
 window.askAI = async function(mode){
-  const aiBox = document.getElementById("aiText");
-  const questionInput = document.getElementById("buyQuestionInput");
-  const question = questionInput ? questionInput.value.trim() : "";
+const aiBox = document.getElementById("aiText");
+const questionInput = document.getElementById("buyQuestionInput");
+const question = questionInput ? questionInput.value.trim() : "";
 
-  if(mode === "can_i_buy" && !question){
-    aiBox.className = "note warn";
-    aiBox.innerText = "Ne almak istediğini ve yaklaşık tutarı yazmalısın. Örn: Bugün 850 TL ayakkabı alsam zorlanır mıyım?";
-    return;
-  }
+if(mode === "can_i_buy" && !question){
+aiBox.className = "note warn";
+aiBox.innerText = "Ne almak istediğini ve yaklaşık tutarı yazmalısın. Örn: Bugün 850 TL ayakkabı alsam zorlanır mıyım?";
+return;
+}
 
-  if(!data.plan.income){
-    aiBox.className = "note warn";
-    aiBox.innerText = "AI yorum için önce Plan ekranından aylık gelirini girmen gerekiyor.";
-    return;
-  }
+if(!data.plan.income){
+aiBox.className = "note warn";
+aiBox.innerText = "AI yorum için önce Plan ekranından aylık gelirini girmen gerekiyor.";
+return;
+}
 
-  aiBox.className = "note info";
-  aiBox.innerText = "AI Koç düşünüyor...";
+aiBox.className = "note info";
+aiBox.innerText = "AI Koç düşünüyor...";
 
-  try{
-    const response = await fetch("/.netlify/functions/ai-coach", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        mode,
-        question,
-        summary: buildFinanceSummary()
-      })
-    });
+try{
+const summary = buildFinanceSummary();
 
-    const result = await response.json();
+console.log("FinAsist AI Summary:", summary);
 
-    if(!response.ok){
-      aiBox.className = "note bad";
-      aiBox.innerText = "AI hatası: " + (result.error || "Bilinmeyen hata");
-      return;
-    }
+const response = await fetch("/.netlify/functions/ai-coach", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    mode: mode,
+    question: question,
+    summary: summary
+  })
+});
 
-    aiBox.className = "note good";
-    aiBox.innerText = result.text || "AI cevap üretemedi.";
-  }catch(error){
-    aiBox.className = "note bad";
-    aiBox.innerText = "AI bağlantı hatası: " + error.message;
-  }
+let result = {};
+
+try{
+  result = await response.json();
+}catch(e){
+  result = {
+    error: "AI cevabı JSON olarak okunamadı."
+  };
+}
+
+if(!response.ok){
+  aiBox.className = "note bad";
+  aiBox.innerText = "AI hatası: " + (result.error || "Bilinmeyen hata");
+  return;
+}
+
+aiBox.className = "note good";
+aiBox.innerText = result.text || "AI cevap üretemedi.";
+
+}catch(error){
+aiBox.className = "note bad";
+aiBox.innerText = "AI bağlantı hatası: " + error.message;
+}
 };
-document.getElementById("googleLoginBtn").addEventListener("click",async()=>{
-  try{
-    showError("loginError","");
-    const result=await signInWithPopup(auth,provider);
-    currentUser=result.user;
-  }catch(e){
-    showError("loginError","Giriş hatası: "+e.message);
-  }
+
+document.getElementById("googleLoginBtn").addEventListener("click", async () => {
+try{
+showError("loginError", "");
+const result = await signInWithPopup(auth, provider);
+currentUser = result.user;
+}catch(e){
+showError("loginError", "Giriş hatası: " + e.message);
+}
 });
 
-document.getElementById("guestLoginBtn").addEventListener("click",()=>{
-  isGuest=true;
-  currentUser=null;
-  loadGuestData();
-  enterApp();
+document.getElementById("guestLoginBtn").addEventListener("click", () => {
+isGuest = true;
+currentUser = null;
+loadGuestData();
+enterApp();
 });
 
-document.getElementById("logoutBtn").addEventListener("click",async()=>{
-  if(isGuest){
-    location.reload();
-  }else{
-    await signOut(auth);
-    location.reload();
-  }
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+if(isGuest){
+location.reload();
+}else{
+await signOut(auth);
+location.reload();
+}
 });
 
 function enterApp(){
-  document.getElementById("loginPage").style.display="none";
-  document.getElementById("appPage").style.display="block";
-  document.getElementById("bottomNav").style.display="block";
-  document.getElementById("userModeText").innerText=isGuest?"Misafir mod":"Google hesabı ile senkron";
-  document.getElementById("accountText").innerText=isGuest?"Misafir kullanıcı: Veriler sadece bu cihazda tutulur.":"Giriş yapan kullanıcı: "+(currentUser.email||"");
-  render();
+document.getElementById("loginPage").style.display = "none";
+document.getElementById("appPage").style.display = "block";
+document.getElementById("bottomNav").style.display = "block";
+
+document.getElementById("userModeText").innerText = isGuest
+? "Misafir mod"
+: "Google hesabı ile senkron";
+
+document.getElementById("accountText").innerText = isGuest
+? "Misafir kullanıcı: Veriler sadece bu cihazda tutulur."
+: "Giriş yapan kullanıcı: " + (currentUser.email || "");
+
+render();
 }
 
-onAuthStateChanged(auth,async(user)=>{
-  setupDaySelect();
-  if(user){
-    currentUser=user;
-    isGuest=false;
-    await loadCloudData(user);
-    enterApp();
-  }
+onAuthStateChanged(auth, async (user) => {
+setupDaySelect();
+
+if(user){
+try{
+currentUser = user;
+isGuest = false;
+await loadCloudData(user);
+enterApp();
+}catch(e){
+showError("loginError", "Veri yükleme hatası: " + e.message);
+}
+}
 });
 </script>
+
 </body>
 </html>
