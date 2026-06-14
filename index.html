@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8" />
@@ -1499,48 +1499,3 @@ document.getElementById("guestLoginBtn").addEventListener("click", () => {
   isGuest = true;
   currentUser = null;
   loadGuestData();
-  enterApp();
-});
-
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-  if(isGuest){
-    location.reload();
-  }else{
-    await signOut(auth);
-    location.reload();
-  }
-});
-
-function enterApp(){
-  document.getElementById("loginPage").style.display = "none";
-  document.getElementById("appPage").style.display = "block";
-  document.getElementById("bottomNav").style.display = "block";
-
-  document.getElementById("userModeText").innerText = isGuest
-    ? "Hesapsiz deneme modu"
-    : "Google hesabi ile senkron";
-
-  document.getElementById("accountText").innerText = isGuest
-    ? "Hesapsiz deneme: Veriler sadece bu cihazda tutulur."
-    : "Giris yapan kullanici: " + (currentUser.email || "");
-
-  render();
-}
-
-setupDaySelect();
-
-onAuthStateChanged(auth, async (user) => {
-  if(user){
-    try{
-      currentUser = user;
-      isGuest = false;
-      await loadCloudData(user);
-      enterApp();
-    }catch(error){
-      showError("loginError","Veri yukleme hatasi: " + error.message);
-    }
-  }
-});
-</script>
-</body>
-</html>
