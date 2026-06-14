@@ -366,26 +366,26 @@ textarea{height:120px;resize:none}
 <div id="loginPage" class="login-wrap">
   <div class="header">
     <div class="logo">FinAsist</div>
-    <div class="subtitle">Ki艧isel b眉t莽e ve harcama karar asistan谋</div>
+    <div class="subtitle">Kisisel butce ve harcama karar asistani</div>
   </div>
 
   <div class="card">
-    <h2 class="section-title">Ba艧la</h2>
+    <h2 class="section-title">Basla</h2>
 
     <div class="note safe-login">
-      Google ile g眉venli ba艧layarak b眉t莽eni hesab谋na kaydedebilir ve farkl谋 cihazlarda kullanabilirsin.
+      Google ile guvenli baslayarak butceni hesabina kaydedebilir ve farkli cihazlarda kullanabilirsin.
     </div>
 
     <button class="btn btn-main full" style="margin-top:12px" id="googleLoginBtn">
-      Google ile G眉venli Ba艧la
+      Google ile Guvenli Basla
     </button>
 
     <button class="btn btn-gray full" style="margin-top:10px" id="guestLoginBtn">
-      Hesaps谋z Dene
+      Hesapsiz Dene
     </button>
 
     <div class="small" style="margin-top:12px">
-      Hesaps谋z deneme modunda bilgiler sadece bu cihazda kal谋r.
+      Hesapsiz deneme modunda bilgiler sadece bu cihazda kalir.
     </div>
 
     <div id="loginError" class="error-text"></div>
@@ -397,7 +397,7 @@ textarea{height:120px;resize:none}
     <div class="header-row">
       <div>
         <div class="logo">FinAsist</div>
-        <div class="subtitle" id="userModeText">Y眉kleniyor...</div>
+        <div class="subtitle" id="userModeText">Yukleniyor...</div>
       </div>
       <div class="pill" id="headerMonth">Bu ay</div>
     </div>
@@ -408,16 +408,16 @@ textarea{height:120px;resize:none}
     <section id="home" class="screen active">
 
       <div class="card">
-        <div class="label">Bug眉n kalan g眉venli alan</div>
+        <div class="label">Bugun kalan guvenli alan</div>
         <div class="big-money" id="todayLeftText">0 TL</div>
 
         <div class="note info" id="homeNote">
-          Plan谋n谋 girince hesaplama ba艧lar.
+          Planini girince hesaplama baslar.
         </div>
 
         <div class="metrics">
           <div class="metric">
-            <div class="k">G眉nl眉k Ba艧lang谋莽 Limiti</div>
+            <div class="k">Gunluk Baslangic Limiti</div>
             <div class="v" id="dailyStartTargetText">0 TL</div>
           </div>
           <div class="metric">
@@ -425,14 +425,14 @@ textarea{height:120px;resize:none}
             <div class="v" id="monthLeftText">0 TL</div>
           </div>
           <div class="metric">
-            <div class="k">Bug眉n Harcama</div>
+            <div class="k">Bugun Harcama</div>
             <div class="v" id="todaySpentText">0 TL</div>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <h2 class="section-title">Bug眉n Ne Harcad谋n?</h2>
+        <h2 class="section-title">Bugun Ne Harcadin?</h2>
         <div class="grid2">
           <button class="btn btn-main" onclick="quickDaily(100)">+100 TL</button>
           <button class="btn btn-main" onclick="quickDaily(250)">+250 TL</button>
@@ -442,22 +442,22 @@ textarea{height:120px;resize:none}
       </div>
 
       <div class="card">
-        <h2 class="section-title">AI Ko莽</h2>
+        <h2 class="section-title">AI Koc</h2>
 
         <div class="grid2">
-          <button class="btn btn-main" onclick="askAI('month')">Bu Ay谋 Yorumla</button>
-          <button class="btn btn-soft" onclick="askAI('saving_plan')">Tasarruf Plan谋</button>
+          <button class="btn btn-main" onclick="askAI('month')">Bu Ayi Yorumla</button>
+          <button class="btn btn-soft" onclick="askAI('saving_plan')">Tasarruf Plani</button>
         </div>
 
         <div class="field" style="margin-top:12px">
           <label>Bunu alabilir miyim?</label>
-          <input id="buyQuestionInput" placeholder="脰rn: Bug眉n 850 TL ayakkab谋 alsam?">
+          <input id="buyQuestionInput" placeholder="Orn: Bugun 850 TL ayakkabi alsam?">
         </div>
 
         <button class="btn btn-blue full" onclick="askAI('can_i_buy')">AI'ya Sor</button>
 
         <div class="note info ai-answer" id="aiText">
-          AI Ko莽 haz谋r. Plan, 枚deme ve harcama bilgilerine g枚re yorum yapar.
+          AI Koc hazir. Plan, odeme ve harcama bilgilerine gore yorum yapar.
         </div>
       </div>
 
@@ -466,20 +466,20 @@ textarea{height:120px;resize:none}
     <section id="bills" class="screen">
       <div class="card">
         <div class="month-switch">
-          <button class="btn btn-gray" onclick="changeBillMonth(-1)">鈥�</button>
+          <button class="btn btn-gray" onclick="changeBillMonth(-1)"><</button>
           <div class="month-center" id="billMonthText">Bu ay</div>
-          <button class="btn btn-gray" onclick="changeBillMonth(1)">鈥�</button>
+          <button class="btn btn-gray" onclick="changeBillMonth(1)">></button>
         </div>
       </div>
 
       <div class="card">
         <div class="section-head">
-          <h2 class="section-title">Sabit 脰demeler</h2>
+          <h2 class="section-title">Sabit Odemeler</h2>
           <button class="btn btn-soft" onclick="openBillModal()">+ Ekle</button>
         </div>
 
         <div class="note info" id="billSummaryNote" style="margin-bottom:12px">
-          Bu ayki sabit 枚demelerin burada g枚r眉n眉r.
+          Bu ayki sabit odemelerin burada gorunur.
         </div>
 
         <div id="billList" class="list"></div>
@@ -489,18 +489,18 @@ textarea{height:120px;resize:none}
     <section id="daily" class="screen">
       <div class="card">
         <div class="month-switch">
-          <button class="btn btn-gray" onclick="changeDailyMonth(-1)">鈥�</button>
+          <button class="btn btn-gray" onclick="changeDailyMonth(-1)"><</button>
           <div class="month-center" id="dailyMonthText">Bu ay</div>
-          <button class="btn btn-gray" onclick="changeDailyMonth(1)">鈥�</button>
+          <button class="btn btn-gray" onclick="changeDailyMonth(1)">></button>
         </div>
       </div>
 
       <div class="card">
-        <button class="btn btn-main full" onclick="openDailyModal()">+ G眉nl眉k Harcama Gir</button>
+        <button class="btn btn-main full" onclick="openDailyModal()">+ Gunluk Harcama Gir</button>
       </div>
 
       <div class="card">
-        <h2 class="section-title">G眉nl眉k Harcamalar</h2>
+        <h2 class="section-title">Gunluk Harcamalar</h2>
         <div id="dailyList" class="list"></div>
       </div>
     </section>
@@ -509,11 +509,11 @@ textarea{height:120px;resize:none}
       <div class="card">
         <div class="section-head">
           <h2 class="section-title">Plan</h2>
-          <button class="btn btn-soft" onclick="openPlanModal()">D眉zenle</button>
+          <button class="btn btn-soft" onclick="openPlanModal()">Duzenle</button>
         </div>
 
         <div class="row">
-          <div><div class="row-title">Ayl谋k gelir</div></div>
+          <div><div class="row-title">Aylik gelir</div></div>
           <div class="row-value" id="incomeText">0 TL</div>
         </div>
 
@@ -523,7 +523,7 @@ textarea{height:120px;resize:none}
         </div>
 
         <div class="row">
-          <div><div class="row-title">Bu ay sabit 枚demeler</div></div>
+          <div><div class="row-title">Bu ay sabit odemeler</div></div>
           <div class="row-value" id="billTotalText">0 TL</div>
         </div>
 
@@ -540,8 +540,8 @@ textarea{height:120px;resize:none}
 
       <div class="card">
         <h2 class="section-title">Hesap</h2>
-        <div class="small" id="accountText">Y眉kleniyor...</div>
-        <button class="btn btn-red full" style="margin-top:12px" id="logoutBtn">脟谋k谋艧 Yap</button>
+        <div class="small" id="accountText">Yukleniyor...</div>
+        <button class="btn btn-red full" style="margin-top:12px" id="logoutBtn">Cikis Yap</button>
       </div>
     </section>
 
@@ -551,46 +551,46 @@ textarea{height:120px;resize:none}
 <nav class="bottom-nav" id="bottomNav" style="display:none">
   <div class="nav-inner">
     <button class="nav-btn active" data-screen="home" onclick="openScreen('home')">
-      <span class="nav-icon">馃彔</span>Ana
+      <span class="nav-icon">[Ana]</span>Ana
     </button>
     <button class="nav-btn" data-screen="bills" onclick="openScreen('bills')">
-      <span class="nav-icon">馃Ь</span>脰deme
+      <span class="nav-icon">[Odeme]</span>Odeme
     </button>
     <button class="nav-btn" data-screen="daily" onclick="openScreen('daily')">
-      <span class="nav-icon">馃捀</span>G眉nl眉k
+      <span class="nav-icon">[Para]</span>Gunluk
     </button>
     <button class="nav-btn" data-screen="plan" onclick="openScreen('plan')">
-      <span class="nav-icon">馃搶</span>Plan
+      <span class="nav-icon">[Plan]</span>Plan
     </button>
   </div>
 </nav>
 
 <div class="modal-bg" id="planModal">
   <div class="modal">
-    <h3 class="modal-title">Plan谋 D眉zenle</h3>
+    <h3 class="modal-title">Plani Duzenle</h3>
 
     <div class="field">
-      <label>Ayl谋k gelir</label>
-      <input id="incomeInput" inputmode="decimal" placeholder="脰rn: 35.000">
+      <label>Aylik gelir</label>
+      <input id="incomeInput" inputmode="decimal" placeholder="Orn: 35.000">
     </div>
 
     <div class="field">
       <label>Birikim hedefi</label>
-      <input id="savingInput" inputmode="decimal" placeholder="脰rn: 3.000">
+      <input id="savingInput" inputmode="decimal" placeholder="Orn: 3.000">
     </div>
 
     <div id="planError" class="error-text"></div>
 
     <div class="grid2">
       <button class="btn btn-main" onclick="savePlan()">Kaydet</button>
-      <button class="btn btn-gray" onclick="closeModal('planModal')">Vazge莽</button>
+      <button class="btn btn-gray" onclick="closeModal('planModal')">Vazgec</button>
     </div>
   </div>
 </div>
 
 <div class="modal-bg" id="billModal">
   <div class="modal">
-    <h3 class="modal-title">Sabit 脰deme Ekle</h3>
+    <h3 class="modal-title">Sabit Odeme Ekle</h3>
 
     <div class="field">
       <label>Ad</label>
@@ -598,28 +598,28 @@ textarea{height:120px;resize:none}
     </div>
 
     <div class="field">
-      <label>T眉r</label>
+      <label>Tur</label>
       <select id="billTypeInput">
         <option>Kira</option>
         <option>Fatura</option>
-        <option>Kredi / Bor莽</option>
+        <option>Kredi / Borc</option>
         <option>Abonelik</option>
-        <option>Di臒er</option>
+        <option>Diger</option>
       </select>
     </div>
 
     <div class="field">
-      <label>Ayl谋k tutar</label>
-      <input id="billAmountInput" inputmode="decimal" placeholder="脰rn: 1.250">
+      <label>Aylik tutar</label>
+      <input id="billAmountInput" inputmode="decimal" placeholder="Orn: 1.250">
     </div>
 
     <div class="field">
-      <label>Son 枚deme g眉n眉</label>
+      <label>Son odeme gunu</label>
       <select id="billDayInput"></select>
     </div>
 
     <div class="field">
-      <label>Ba艧lang谋莽 ay谋</label>
+      <label>Baslangic ayi</label>
       <input id="billStartInput" type="month">
     </div>
 
@@ -627,14 +627,14 @@ textarea{height:120px;resize:none}
 
     <div class="grid2">
       <button class="btn btn-main" onclick="saveBill()">Kaydet</button>
-      <button class="btn btn-gray" onclick="closeModal('billModal')">Vazge莽</button>
+      <button class="btn btn-gray" onclick="closeModal('billModal')">Vazgec</button>
     </div>
   </div>
 </div>
 
 <div class="modal-bg" id="dailyModal">
   <div class="modal">
-    <h3 class="modal-title">G眉nl眉k Harcama</h3>
+    <h3 class="modal-title">Gunluk Harcama</h3>
 
     <div class="field">
       <label>Tarih</label>
@@ -643,19 +643,19 @@ textarea{height:120px;resize:none}
 
     <div class="field">
       <label>Tutar</label>
-      <input id="dailyAmountInput" inputmode="decimal" placeholder="脰rn: 500">
+      <input id="dailyAmountInput" inputmode="decimal" placeholder="Orn: 500">
     </div>
 
     <div class="field">
       <label>Not</label>
-      <input id="dailyNoteInput" placeholder="Market, yemek, ula艧谋m...">
+      <input id="dailyNoteInput" placeholder="Market, yemek, ulasim...">
     </div>
 
     <div id="dailyError" class="error-text"></div>
 
     <div class="grid2">
       <button class="btn btn-main" onclick="saveDaily()">Kaydet</button>
-      <button class="btn btn-gray" onclick="closeModal('dailyModal')">Vazge莽</button>
+      <button class="btn btn-gray" onclick="closeModal('dailyModal')">Vazgec</button>
     </div>
   </div>
 </div>
@@ -782,8 +782,8 @@ function currentMonth(){
 
 function monthLabel(month){
   const months = [
-    "Ocak","艦ubat","Mart","Nisan","May谋s","Haziran",
-    "Temmuz","A臒ustos","Eyl眉l","Ekim","Kas谋m","Aral谋k"
+    "Ocak","Subat","Mart","Nisan","Mayis","Haziran",
+    "Temmuz","Agustos","Eylul","Ekim","Kasim","Aralik"
   ];
   const parts = month.split("-");
   return months[Number(parts[1]) - 1] + " " + parts[0];
@@ -893,8 +893,8 @@ function billActiveInMonth(bill,month){
 function billVersion(bill,month){
   const history = Array.isArray(bill.history) ? bill.history : [];
   let found = history[0] || {
-    name:bill.name || "Sabit 枚deme",
-    type:bill.type || "Di臒er",
+    name:bill.name || "Sabit odeme",
+    type:bill.type || "Diger",
     amount:Number(bill.amount || 0),
     dueDay:Number(bill.dueDay || 1),
     fromMonth:bill.startMonth || currentMonth()
@@ -1020,16 +1020,16 @@ function render(){
 
   if(!data.plan.income){
     note.className = "note info";
-    note.innerText = "脰nce Plan ekran谋ndan ayl谋k gelirini gir. Sonra FinAsist g眉nl眉k g眉venli alan谋n谋 hesaplar.";
+    note.innerText = "Once Plan ekranindan aylik gelirini gir. Sonra FinAsist gunluk guvenli alanini hesaplar.";
   }else if(freeBudget(cm) < 0){
     note.className = "note bad";
-    note.innerText = "Gelirin, sabit 枚demeler ve birikim hedefini kar艧谋lam谋yor. Plan谋 yeniden d眉zenlemelisin.";
+    note.innerText = "Gelirin, sabit odemeler ve birikim hedefini karsilamiyor. Plani yeniden duzenlemelisin.";
   }else if(todayLeftValue < 0){
     note.className = "note warn";
-    note.innerText = "Bug眉n g眉venli alan谋 a艧t谋n. Bug眉n yeni b眉y眉k harcama yapmaman daha iyi olur.";
+    note.innerText = "Bugun guvenli alani astin. Bugun yeni buyuk harcama yapmaman daha iyi olur.";
   }else{
     note.className = "note good";
-    note.innerText = "Bug眉n bu alan i莽inde kal谋rsan ay sonu plan谋n daha dengeli ilerler.";
+    note.innerText = "Bugun bu alan icinde kalirsan ay sonu planin daha dengeli ilerler.";
   }
 
   renderBills();
@@ -1046,13 +1046,13 @@ function renderBills(){
   const billSummary = document.getElementById("billSummaryNote");
   if(bills.length === 0){
     billSummary.className = "note info";
-    billSummary.innerText = "Bu ay i莽in sabit 枚deme yok.";
+    billSummary.innerText = "Bu ay icin sabit odeme yok.";
   }else if(unpaidTotal > 0){
     billSummary.className = "note warn";
-    billSummary.innerText = "Bu ay bekleyen sabit 枚deme: " + money(unpaidTotal);
+    billSummary.innerText = "Bu ay bekleyen sabit odeme: " + money(unpaidTotal);
   }else{
     billSummary.className = "note good";
-    billSummary.innerText = "Bu ayki sabit 枚demelerin 枚denmi艧 g枚r眉n眉yor.";
+    billSummary.innerText = "Bu ayki sabit odemelerin odenmis gorunuyor.";
   }
 
   document.getElementById("billList").innerHTML = bills.length
@@ -1061,10 +1061,10 @@ function renderBills(){
         <div class="row" style="border-bottom:0;padding:0">
           <div>
             <div class="row-title">${escapeHtml(bill.name)}</div>
-            <div class="row-meta">${escapeHtml(bill.type)} 路 Her ay谋n ${bill.dueDay}. g眉n眉</div>
+            <div class="row-meta">${escapeHtml(bill.type)} - Her ayin ${bill.dueDay}. gunu</div>
             <div style="margin-top:8px">
               <span class="badge ${bill.paid ? "b-green" : "b-yellow"}">
-                ${bill.paid ? "脰dendi " + escapeHtml(dateTR(bill.paidDate)) : "脰denmedi"}
+                ${bill.paid ? "Odendi " + escapeHtml(dateTR(bill.paidDate)) : "Odenmedi"}
               </span>
             </div>
           </div>
@@ -1073,15 +1073,15 @@ function renderBills(){
 
         <div class="grid2" style="margin-top:12px">
           <button class="btn ${bill.paid ? "btn-gray" : "btn-main"}" onclick="toggleBillPaid('${bill.key}')">
-            ${bill.paid ? "脰denmedi Yap" : "脰dendi Yap"}
+            ${bill.paid ? "Odenmedi Yap" : "Odendi Yap"}
           </button>
           <button class="btn btn-red" onclick="removeBillFuture('${bill.id}')">
-            Gelecekten Kald谋r
+            Gelecekten Kaldir
           </button>
         </div>
       </div>
     `).join("")
-    : `<div class="empty">Bu ay i莽in sabit 枚deme yok.</div>`;
+    : `<div class="empty">Bu ay icin sabit odeme yok.</div>`;
 }
 
 function renderDaily(){
@@ -1094,7 +1094,7 @@ function renderDaily(){
     ? `
       <div class="item">
         <div class="row">
-          <div><div class="row-title">Ay toplam谋</div></div>
+          <div><div class="row-title">Ay toplami</div></div>
           <div class="row-value">${money(dailyTotal(selectedDailyMonth))}</div>
         </div>
       </div>
@@ -1104,7 +1104,7 @@ function renderDaily(){
           <div class="row" style="border-bottom:0;padding:0">
             <div>
               <div class="row-title">${escapeHtml(dateTR(item.date))}</div>
-              <div class="row-meta">${escapeHtml(item.note || "G眉nl眉k harcama")}</div>
+              <div class="row-meta">${escapeHtml(item.note || "Gunluk harcama")}</div>
             </div>
             <div class="row-value">${money(item.amount)}</div>
           </div>
@@ -1115,7 +1115,7 @@ function renderDaily(){
         </div>
       `).join("")}
     `
-    : `<div class="empty">Bu ay g眉nl眉k harcama yok.</div>`;
+    : `<div class="empty">Bu ay gunluk harcama yok.</div>`;
 }
 
 function renderPlan(){
@@ -1149,12 +1149,12 @@ window.savePlan = async function(){
   const saving = parseAmount(document.getElementById("savingInput").value);
 
   if(income === null){
-    showError("planError","Gelir hatal谋.");
+    showError("planError","Gelir hatali.");
     return;
   }
 
   if(saving === null){
-    showError("planError","Birikim hedefi hatal谋.");
+    showError("planError","Birikim hedefi hatali.");
     return;
   }
 
@@ -1187,12 +1187,12 @@ window.saveBill = async function(){
   }
 
   if(amount === null || amount <= 0){
-    showError("billError","Tutar hatal谋.");
+    showError("billError","Tutar hatali.");
     return;
   }
 
   if(!startMonth){
-    showError("billError","Ba艧lang谋莽 ay谋 se莽.");
+    showError("billError","Baslangic ayi sec.");
     return;
   }
 
@@ -1231,7 +1231,7 @@ window.toggleBillPaid = async function(key){
 };
 
 window.removeBillFuture = async function(id){
-  if(!confirm("Bu sabit 枚deme bu aydan sonraki aylardan kald谋r谋ls谋n m谋?")) return;
+  if(!confirm("Bu sabit odeme bu aydan sonraki aylardan kaldirilsin mi?")) return;
 
   data.bills = data.bills.map(bill => {
     if(bill.id !== id) return bill;
@@ -1257,7 +1257,7 @@ window.quickDaily = async function(amount){
     id:Date.now().toString(),
     date:today(),
     amount:Number(amount),
-    note:"H谋zl谋 giri艧"
+    note:"Hizli giris"
   });
 
   await saveData();
@@ -1270,12 +1270,12 @@ window.saveDaily = async function(){
   const note = document.getElementById("dailyNoteInput").value.trim();
 
   if(!date){
-    showError("dailyError","Tarih se莽.");
+    showError("dailyError","Tarih sec.");
     return;
   }
 
   if(amount === null || amount <= 0){
-    showError("dailyError","Tutar hatal谋.");
+    showError("dailyError","Tutar hatali.");
     return;
   }
 
@@ -1294,7 +1294,7 @@ window.saveDaily = async function(){
 };
 
 window.deleteDaily = async function(id){
-  if(!confirm("Bu g眉nl眉k harcama silinsin mi?")) return;
+  if(!confirm("Bu gunluk harcama silinsin mi?")) return;
 
   data.daily = data.daily.filter(item => item.id !== id);
 
@@ -1430,18 +1430,18 @@ window.askAI = async function(mode){
 
   if(mode === "can_i_buy" && !question){
     aiBox.className = "note warn ai-answer";
-    aiBox.innerText = "Ne almak istedi臒ini ve yakla艧谋k tutar谋 yazmal谋s谋n. 脰rn: Bug眉n 850 TL ayakkab谋 alsam?";
+    aiBox.innerText = "Ne almak istedigini ve yaklasik tutari yazmalisin. Orn: Bugun 850 TL ayakkabi alsam?";
     return;
   }
 
   if(!data.plan.income){
     aiBox.className = "note warn ai-answer";
-    aiBox.innerText = "AI yorum i莽in 枚nce Plan ekran谋ndan ayl谋k gelirini girmen gerekiyor.";
+    aiBox.innerText = "AI yorum icin once Plan ekranindan aylik gelirini girmen gerekiyor.";
     return;
   }
 
   aiBox.className = "note info ai-answer";
-  aiBox.innerText = "AI Ko莽 d眉艧眉n眉yor...";
+  aiBox.innerText = "AI Koc dusunuyor...";
 
   try{
     const summary = buildFinanceSummary();
@@ -1466,22 +1466,22 @@ window.askAI = async function(mode){
       result = await response.json();
     }catch(e){
       result = {
-        error:"AI cevab谋 JSON olarak okunamad谋."
+        error:"AI cevabi JSON olarak okunamadi."
       };
     }
 
     if(!response.ok){
       aiBox.className = "note bad ai-answer";
-      aiBox.innerText = "AI hatas谋: " + (result.error || "Bilinmeyen hata");
+      aiBox.innerText = "AI hatasi: " + (result.error || "Bilinmeyen hata");
       return;
     }
 
     aiBox.className = "note good ai-answer";
-    aiBox.innerText = result.text || "AI cevap 眉retemedi.";
+    aiBox.innerText = result.text || "AI cevap uretemedi.";
 
   }catch(error){
     aiBox.className = "note bad ai-answer";
-    aiBox.innerText = "AI ba臒lant谋 hatas谋: " + error.message;
+    aiBox.innerText = "AI baglanti hatasi: " + error.message;
   }
 };
 
@@ -1491,7 +1491,7 @@ document.getElementById("googleLoginBtn").addEventListener("click", async () => 
     const result = await signInWithPopup(auth,provider);
     currentUser = result.user;
   }catch(error){
-    showError("loginError","Giri艧 hatas谋: " + error.message);
+    showError("loginError","Giris hatasi: " + error.message);
   }
 });
 
@@ -1517,12 +1517,12 @@ function enterApp(){
   document.getElementById("bottomNav").style.display = "block";
 
   document.getElementById("userModeText").innerText = isGuest
-    ? "Hesaps谋z deneme modu"
-    : "Google hesab谋 ile senkron";
+    ? "Hesapsiz deneme modu"
+    : "Google hesabi ile senkron";
 
   document.getElementById("accountText").innerText = isGuest
-    ? "Hesaps谋z deneme: Veriler sadece bu cihazda tutulur."
-    : "Giri艧 yapan kullan谋c谋: " + (currentUser.email || "");
+    ? "Hesapsiz deneme: Veriler sadece bu cihazda tutulur."
+    : "Giris yapan kullanici: " + (currentUser.email || "");
 
   render();
 }
@@ -1537,7 +1537,7 @@ onAuthStateChanged(auth, async (user) => {
       await loadCloudData(user);
       enterApp();
     }catch(error){
-      showError("loginError","Veri y眉kleme hatas谋: " + error.message);
+      showError("loginError","Veri yukleme hatasi: " + error.message);
     }
   }
 });
